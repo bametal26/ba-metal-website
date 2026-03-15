@@ -21,35 +21,49 @@ color:white;
 overflow-x:hidden;
 }
 
-/* STAR FIELD */
+/* DEEP SPACE STARFIELD */
 
 body::before{
 content:"";
 position:fixed;
-width:200%;
-height:200%;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-animation:stars 140s linear infinite;
-z-index:-2;
+width:300%;
+height:300%;
+background:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 2px, transparent 2px);
+background-size:40px 40px, 80px 80px,120px 120px;
+opacity:.6;
+animation:starMove 200s linear infinite;
+z-index:-3;
 }
 
-@keyframes stars{
+@keyframes starMove{
 from{transform:translate(0,0);}
-to{transform:translate(-2000px,-1000px);}
+to{transform:translate(-2000px,-1500px);}
 }
 
-/* ROCKET */
+/* ROCKET WITH SMOKE */
 
 .rocket{
 position:fixed;
 font-size:32px;
-animation:fly 12s linear infinite;
-opacity:.8;
+animation:fly 14s linear infinite;
+z-index:-1;
+}
+
+.rocket::after{
+content:"☁️☁️";
+position:absolute;
+left:-30px;
+top:10px;
+font-size:18px;
+opacity:.7;
 }
 
 @keyframes fly{
-0%{left:-100px; top:80%;}
-100%{left:110%; top:10%;}
+0%{left:-120px; top:80%;}
+100%{left:110%; top:15%;}
 }
 
 /* HEADER */
@@ -101,7 +115,7 @@ transform:scale(1.1);
 
 .hero{
 text-align:center;
-padding:60px 20px 20px;
+padding:60px 20px 30px;
 }
 
 .hero h1{
@@ -129,29 +143,29 @@ text-decoration:none;
 
 .planet-system{
 position:relative;
-width:180px;
-height:180px;
-margin:40px auto 10px;
+width:200px;
+height:200px;
+margin:80px auto 20px;
 }
 
 .earth{
-width:120px;
-height:120px;
+width:140px;
+height:140px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
 position:absolute;
-top:30px;
+top:40px;
 left:30px;
-box-shadow:0 0 20px #0a84ff;
+box-shadow:0 0 25px #0a84ff;
 }
 
 .logo-orbit{
 position:absolute;
-width:30px;
-height:30px;
+width:28px;
+height:28px;
 border-radius:50%;
-animation:orbit 18s linear infinite;
+animation:orbit 22s linear infinite;
 }
 
 @keyframes orbit{
@@ -230,7 +244,7 @@ font-size:18px;
 
 .contact-item a:hover{color:#0a84ff;}
 
-/* TICKER */
+/* STOCK TICKER */
 
 #ticker{
 position:fixed;
@@ -312,7 +326,7 @@ footer{padding:60px;text-align:center;color:#777;}
 <div class="cap">Inconel Machining</div>
 <div class="cap">Titanium Components</div>
 <div class="cap">Hardened Tool Steel</div>
-<div class="cap">High‑Temperature Alloys</div>
+<div class="cap">High Temperature Alloys</div>
 <div class="cap">Stainless Steel</div>
 <div class="cap">Tight Tolerance Parts</div>
 <div class="cap">Prototype Development</div>
@@ -353,13 +367,11 @@ footer{padding:60px;text-align:center;color:#777;}
 </div>
 
 <div class="contact-item">
-📞 <a href="tel:15864840469">Stephen Andrews — Owner</a><br>
-(586) 484‑0469
+📞 <a href="tel:15864840469">Stephen Andrews — Owner</a>
 </div>
 
 <div class="contact-item">
-📞 <a href="tel:18102939524">Nicholas Birchmeier — Owner</a><br>
-(810) 293‑9524
+📞 <a href="tel:18102939524">Nicholas Birchmeier — Owner</a>
 </div>
 
 </div>
@@ -381,14 +393,12 @@ BA Metal LLC CNC Machining
 <span class="up">Nvidia ▲1.1%</span>
 <span class="up">Dow Jones ▲0.45%</span>
 
-<span class="bametal" id="bametal">BA METAL 🚀 +5.0%</span>
+<span class="bametal" id="bametal">BA METAL ▲5.0%</span>
 
 <span class="up">ATI Metals ▲2.4%</span>
 <span class="up">Carpenter Tech ▲1.8%</span>
 <span class="down">Kennametal ▼0.6%</span>
 <span class="up">Alcoa ▲3.2%</span>
-<span class="up">Nvidia ▲1.1%</span>
-<span class="up">Dow Jones ▲0.45%</span>
 
 </div>
 
@@ -412,27 +422,6 @@ document.getElementById("clock").innerText=now.toLocaleTimeString();
 
 setInterval(updateClock,1000);
 updateClock();
-
-/* BA METAL STOCK */
-
-function updateBAMetal(){
-
-let percent=(Math.random()*4+1).toFixed(2);
-let up=Math.random()>0.4;
-
-let el=document.getElementById("bametal");
-
-if(up){
-el.innerText="BA METAL 🚀 +"+percent+"%";
-el.className="bametal up";
-}else{
-el.innerText="BA METAL ▼ -"+percent+"%";
-el.className="bametal down";
-}
-
-}
-
-setInterval(updateBAMetal,5000);
 
 </script>
 
