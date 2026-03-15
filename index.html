@@ -360,7 +360,7 @@ Upload CAD Files
 
 <h2>Contact</h2>
 
-<div style="font-size:18px; line-height:1.8;">
+<div style="font-size:18px; line-height:1.8; text-align:center;">
 
 <strong>BA Metal LLC</strong><br>
 
@@ -392,7 +392,6 @@ height="400">
 
 </section>
 
-<div id="metal-bar"></div>
 
 <div id="ticker">
 <div class="ticker" id="ticker-data"></div>
@@ -435,12 +434,16 @@ for(let s of stocks){
 
 try{
 
-let r=await fetch("https://financialmodelingprep.com/api/v3/quote/"+s+"?apikey=demo");
+let r=await fetch("https://api.allorigins.win/raw?url=https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
 
 let d=await r.json();
 
-let price=d[0].price;
-let percent=d[0].changesPercentage;
+let q=d.symbols[0];
+
+let price=parseFloat(q.close);
+let open=parseFloat(q.open);
+
+let percent=((price-open)/open)*100;
 
 let cls=percent>=0?"up":"down";
 
