@@ -66,11 +66,25 @@ background:#1e6fff;
 box-shadow:0 0 10px #1e6fff;
 }
 
+/* CLOCK */
+
+#clock{
+position:absolute;
+right:25px;
+font-family:Orbitron;
+color:#00eaff;
+border:1px solid #1e6fff;
+padding:6px 12px;
+border-radius:6px;
+box-shadow:0 0 10px #1e6fff;
+}
+
 /* HERO */
 
 .hero{
 text-align:center;
 padding:50px 20px 20px 20px;
+position:relative;
 }
 
 .hero h1{
@@ -98,6 +112,21 @@ border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
 box-shadow:0 0 60px #1e6fff;
+}
+
+/* ROCKET */
+
+.rocket{
+position:absolute;
+top:50%;
+left:-60px;
+font-size:40px;
+animation:rocketFly 14s linear infinite;
+}
+
+@keyframes rocketFly{
+0%{left:-60px}
+100%{left:110%}
 }
 
 /* SECTIONS */
@@ -171,7 +200,7 @@ cursor:pointer;
 box-shadow:0 0 10px #1e6fff;
 }
 
-/* CUSTOM FILE BUTTON */
+/* FILE BUTTON */
 
 .file-upload{
 background:#1e6fff;
@@ -180,7 +209,6 @@ padding:12px 20px;
 border-radius:6px;
 cursor:pointer;
 font-weight:600;
-display:inline-block;
 text-align:center;
 box-shadow:0 0 10px #1e6fff;
 }
@@ -196,7 +224,16 @@ margin-top:40px;
 line-height:1.8;
 }
 
-/* LIVE MARKET TICKER */
+.contact a{
+color:#1e90ff;
+text-decoration:none;
+}
+
+.contact a:hover{
+text-decoration:underline;
+}
+
+/* TICKER */
 
 #ticker{
 position:fixed;
@@ -211,15 +248,15 @@ z-index:9999;
 .ticker{
 white-space:nowrap;
 display:inline-block;
-animation:ticker 40s linear infinite;
+animation:tickerMove 45s linear infinite;
 font-family:monospace;
 font-size:20px;
 padding:10px 0;
 }
 
-@keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+@keyframes tickerMove{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
 }
 
 .up{color:#00ff9d;font-weight:bold;margin-right:80px;}
@@ -227,7 +264,6 @@ padding:10px 0;
 .metal{color:#1e90ff;font-weight:bold;margin-right:80px;}
 
 </style>
-
 </head>
 
 <body>
@@ -240,6 +276,8 @@ padding:10px 0;
 <a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
 
+<div id="clock"></div>
+
 </nav>
 
 <section class="hero" id="home">
@@ -251,6 +289,8 @@ padding:10px 0;
 <a class="button" href="#rfq">Request a Quote</a>
 
 <div class="earth"></div>
+
+<div class="rocket">🚀</div>
 
 </section>
 
@@ -319,11 +359,17 @@ Upload CAD Files
 
 <h2>Contact</h2>
 
-<p>Email: bametal.llc@gmail.com</p>
+<p>Email:
+<a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a>
+</p>
 
-<p>Stephen Andrews — (586) 484‑0469</p>
+<p>Stephen Andrews —
+<a href="tel:15864840469">(586) 484‑0469</a>
+</p>
 
-<p>Nick Birchmeier — (810) 293‑9524</p>
+<p>Nick Birchmeier —
+<a href="tel:18102939524">(810) 293‑9524</a>
+</p>
 
 </div>
 
@@ -334,6 +380,18 @@ Upload CAD Files
 </div>
 
 <script>
+
+/* CLOCK */
+
+function updateClock(){
+document.getElementById("clock").innerText =
+new Date().toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+/* MARKET DATA */
 
 async function loadMarket(){
 
@@ -380,14 +438,13 @@ ${m[1]} ${q.regularMarketPrice}
 
 }
 
-/* duplicate so ticker never stops */
+/* duplicate ticker */
 
-document.getElementById("ticker-data").innerHTML=html+html;
+document.getElementById("ticker-data").innerHTML = html + html;
 
 }
 
 loadMarket();
-
 setInterval(loadMarket,300000);
 
 </script>
