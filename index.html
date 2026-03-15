@@ -7,23 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-
-html{
-scroll-behavior:smooth;
-}
 
 body{
 margin:0;
 font-family:Poppins;
+background:black;
 color:white;
-background:#030303;
 overflow-x:hidden;
 }
 
-/* SPACE BACKGROUND */
+/* STAR BACKGROUND */
 
 body::before{
 content:"";
@@ -31,7 +27,7 @@ position:fixed;
 width:200%;
 height:200%;
 background:url("https://www.transparenttextures.com/patterns/stardust.png");
-animation:stars 140s linear infinite;
+animation:stars 120s linear infinite;
 z-index:-1;
 }
 
@@ -44,7 +40,7 @@ to{transform:translate(-2000px,-1000px);}
 
 header{
 text-align:center;
-padding:35px;
+padding:30px;
 }
 
 /* LIVE BAR */
@@ -52,11 +48,26 @@ padding:35px;
 #livebar{
 display:flex;
 justify-content:center;
-gap:60px;
+gap:70px;
 font-size:22px;
-font-weight:700;
+font-weight:600;
 padding:16px;
 border-bottom:1px solid #222;
+}
+
+/* greeting */
+
+#greeting{
+font-weight:700;
+color:#0a84ff;
+}
+
+/* DIGITAL CLOCK */
+
+#clock{
+font-family:"Share Tech Mono";
+font-size:24px;
+letter-spacing:2px;
 }
 
 /* NAV */
@@ -64,17 +75,14 @@ border-bottom:1px solid #222;
 nav{
 display:flex;
 justify-content:center;
-gap:45px;
-padding:30px;
+gap:40px;
+padding:28px;
 background:#050505;
 border-bottom:1px solid #222;
-position:sticky;
-top:0;
-z-index:10;
 }
 
 nav a{
-font-size:22px;
+font-size:20px;
 font-weight:600;
 color:white;
 text-decoration:none;
@@ -85,7 +93,7 @@ transition:0.25s;
 
 nav a:hover{
 background:#0a84ff;
-transform:scale(1.25);
+transform:scale(1.2);
 box-shadow:0 0 18px #0a84ff;
 }
 
@@ -123,13 +131,13 @@ transform:translateY(-4px);
 box-shadow:0 0 20px #0a84ff;
 }
 
-/* EARTH SYSTEM */
+/* PLANET SYSTEM */
 
 .planet-system{
 position:relative;
-width:280px;
-height:280px;
-margin:40px auto 80px;
+width:260px;
+height:260px;
+margin:80px auto;
 }
 
 .earth{
@@ -139,47 +147,45 @@ border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
 position:absolute;
-top:50px;
-left:50px;
+top:40px;
+left:40px;
 box-shadow:0 0 25px #0a84ff;
 }
 
 .logo-orbit{
 position:absolute;
-width:60px;
-height:60px;
+width:50px;
+height:50px;
 border-radius:50%;
-animation:orbit 12s linear infinite;
+animation:orbit 14s linear infinite;
 }
 
 @keyframes orbit{
 
 0%{
-transform:rotate(0deg) translateX(120px) rotate(0deg);
+transform:rotate(0deg) translateX(110px) rotate(0deg);
 }
 
 100%{
-transform:rotate(360deg) translateX(120px) rotate(-360deg);
+transform:rotate(360deg) translateX(110px) rotate(-360deg);
 }
 
 }
 
-/* SECTIONS */
+/* CAPABILITIES */
 
 .section{
 max-width:1100px;
 margin:auto;
-padding:110px 20px;
+padding:100px 20px;
 text-align:center;
 }
 
 .section h2{
 font-family:Orbitron;
-font-size:40px;
-margin-bottom:50px;
+font-size:38px;
+margin-bottom:40px;
 }
-
-/* CAPABILITIES */
 
 .cap-grid{
 display:grid;
@@ -230,14 +236,17 @@ width:100%;
 border-radius:10px;
 }
 
-/* STOCK TICKER */
+/* MARKET TICKER */
 
 #ticker{
 position:fixed;
 bottom:0;
 width:100%;
-background:black;
-border-top:1px solid #333;
+background:#000;
+border-top:2px solid #0a84ff;
+padding:14px 0;
+font-family:"Share Tech Mono";
+font-size:18px;
 overflow:hidden;
 white-space:nowrap;
 }
@@ -246,7 +255,6 @@ white-space:nowrap;
 display:inline-block;
 padding-left:100%;
 animation:ticker 30s linear infinite;
-font-size:16px;
 }
 
 @keyframes ticker{
@@ -269,12 +277,15 @@ margin-top:80px;
 <body>
 
 <header>
-<img src="BA Logo.jpg" style="height:180px;">
+<img src="BA Logo.jpg" style="height:170px;">
 </header>
 
 <div id="livebar">
+
 <div id="greeting"></div>
+
 <div id="clock"></div>
+
 </div>
 
 <nav>
@@ -309,10 +320,10 @@ margin-top:80px;
 <div class="cap">Hardened Tool Steel</div>
 <div class="cap">Titanium Components</div>
 <div class="cap">Stainless Steel</div>
+<div class="cap">High‑Temperature Alloys</div>
+<div class="cap">Tight Tolerance Parts</div>
 <div class="cap">Prototype Development</div>
 <div class="cap">Production Machining</div>
-<div class="cap">Tight Tolerance Parts</div>
-<div class="cap">Engineering Plastics</div>
 
 </div>
 
@@ -327,37 +338,14 @@ margin-top:80px;
 <div class="machine">
 <img src="vf0.webp">
 <h3>Haas VF‑0</h3>
-<p>Precision vertical machining center.</p>
 </div>
 
 <div class="machine">
 <img src="jupiter.png">
 <h3>Jupiter Precision Mill</h3>
-<p>High accuracy machining.</p>
 </div>
 
 </div>
-
-</section>
-
-<section class="section" id="quote">
-
-<h2>Send Prints for Quote</h2>
-
-<p>Email STEP files or drawings to:</p>
-
-<p><b>bametal.llc@gmail.com</b></p>
-
-</section>
-
-<section class="section" id="contact">
-
-<h2>Contact</h2>
-
-<p>
-BA Metal LLC  
-Mount Clemens, Michigan
-</p>
 
 </section>
 
@@ -366,14 +354,17 @@ BA Metal LLC CNC Machining
 </footer>
 
 <div id="ticker">
+
 <span>
-LIVE MARKET • Kennametal (KMT) • Carpenter Technology (CRS) • ATI Metals (ATI) • Alcoa (AA) • Titanium Metals (TIE) • Industrial Manufacturing Sector Updates
+LIVE MARKET ► ATI Metals ▲2.4% • Carpenter Technology ▲1.8% • Kennametal ▼0.6% • Alcoa ▲3.2% • Precision Castparts ▲1.1% • Aerospace Manufacturing Sector Trending Up
 </span>
+
 </div>
 
 <script>
 
 let hour = new Date().getHours();
+
 let greet="Welcome";
 
 if(hour<12){greet="Good Morning";}
@@ -383,11 +374,16 @@ else{greet="Good Evening";}
 document.getElementById("greeting").innerText=greet+" — Welcome to BA Metal";
 
 function updateClock(){
+
 let now=new Date();
-document.getElementById("clock").innerText="Local Time: "+now.toLocaleTimeString();
+
+document.getElementById("clock").innerText=
+now.toLocaleTimeString();
+
 }
 
 setInterval(updateClock,1000);
+
 updateClock();
 
 </script>
