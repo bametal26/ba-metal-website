@@ -543,9 +543,9 @@ z-index:9998;
 async function loadMetals(){
 
 const metals=[
-{symbol:"HG=F",name:"Copper"},
-{symbol:"ALI=F",name:"Aluminum"},
-{symbol:"NI=F",name:"Nickel"}
+{name:"Copper",price:4.05,change:0.22},
+{name:"Aluminum",price:1.02,change:-0.11},
+{name:"Nickel",price:18240,change:0.31}
 ];
 ];
 
@@ -553,19 +553,22 @@ let html="";
 
 for(let m of metals){
 
+let arrow = m.change >= 0 ? "▲" : "▼";
+let color = m.change >= 0 ? "#00ff9d" : "#ff4c4c";
+
+html += `<span style="margin-right:30px;color:${color}">
+html += `<span style="margin-right:30px;color:${color}">
+${m.name} ${arrow} ${m.price} (${m.change}%)
+</span>`;
+}
 try{
-
-let r = await fetch("https://query2.finance.yahoo.com/v7/finance/quote?symbols="+m.symbol);
-let d=await r.json();
-let q=d.quoteResponse.result[0];
-
-let price = q.regularMarketPrice;
-let previous = q.regularMarketPreviousClose;
-
-let change = ((price - previous) / previous) * 100;
-let arrow = change >= 0 ? "▲" : "▼";
-let color = change >= 0 ? "#00ff9d" : "#ff4c4c";
-
+let r = await fetch(...)
+let d = await r.json()
+let q = d.quoteResponse.result[0]
+...
+}catch(e){
+html+=`<span>${m.name}</span>`;
+}
 html += `<span style="margin-right:30px;color:${color}">
 ${m.name} ${arrow} ${price.toFixed(2)} (${change.toFixed(2)}%)
 </span>`;
