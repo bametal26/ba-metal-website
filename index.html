@@ -28,7 +28,7 @@ height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
 radial-gradient(#4e8cff 2px, transparent 2px);
-background-size:180px 180px,260px 260px;
+background-size:200px 200px,280px 280px;
 animation:stars 140s linear infinite;
 z-index:-1;
 }
@@ -56,7 +56,7 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:600;
-padding:6px 12px;
+padding:6px 14px;
 border-radius:6px;
 transition:.3s;
 }
@@ -171,6 +171,24 @@ cursor:pointer;
 box-shadow:0 0 10px #1e6fff;
 }
 
+/* CUSTOM FILE BUTTON */
+
+.file-upload{
+background:#1e6fff;
+color:white;
+padding:12px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+display:inline-block;
+text-align:center;
+box-shadow:0 0 10px #1e6fff;
+}
+
+.file-upload input{
+display:none;
+}
+
 /* CONTACT */
 
 .contact{
@@ -178,7 +196,7 @@ margin-top:40px;
 line-height:1.8;
 }
 
-/* LIVE TICKER */
+/* LIVE MARKET TICKER */
 
 #ticker{
 position:fixed;
@@ -187,27 +205,29 @@ width:100%;
 background:black;
 border-top:3px solid #1e6fff;
 overflow:hidden;
-font-family:monospace;
-font-size:22px;
+z-index:9999;
 }
 
-.ticker-track{
-display:flex;
-gap:120px;
+.ticker{
 white-space:nowrap;
+display:inline-block;
 animation:ticker 40s linear infinite;
+font-family:monospace;
+font-size:20px;
+padding:10px 0;
 }
 
 @keyframes ticker{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
 }
 
-.up{color:#00ff9d;font-weight:bold;}
-.down{color:#ff4c4c;font-weight:bold;}
-.metal{color:#1e90ff;font-weight:bold;}
+.up{color:#00ff9d;font-weight:bold;margin-right:80px;}
+.down{color:#ff4c4c;font-weight:bold;margin-right:80px;}
+.metal{color:#1e90ff;font-weight:bold;margin-right:80px;}
 
 </style>
+
 </head>
 
 <body>
@@ -284,7 +304,10 @@ enctype="multipart/form-data">
 
 <input type="email" name="email" placeholder="Email" required>
 
+<label class="file-upload">
+Upload CAD Files
 <input type="file" name="attachment" multiple>
+</label>
 
 <textarea name="message" placeholder="Project details"></textarea>
 
@@ -307,9 +330,7 @@ enctype="multipart/form-data">
 </section>
 
 <div id="ticker">
-<div class="ticker-track" id="ticker-data">
-Loading market data...
-</div>
+<div class="ticker" id="ticker-data">Loading market data...</div>
 </div>
 
 <script>
@@ -330,46 +351,36 @@ let html="";
 
 for(let s of stocks){
 
-let r=await fetch(
-"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s
-);
-
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
 let d=await r.json();
-
 let q=d.quoteResponse.result[0];
 
 let price=q.regularMarketPrice;
 let change=q.regularMarketChangePercent.toFixed(2);
 
-let c=change>=0?"up":"down";
+let cls=change>=0?"up":"down";
 
-html+=`<span class="${c}">
+html+=`<span class="${cls}">
 ${s} ${price} (${change}%)
 </span>`;
 
 }
 
-/* METAL FUTURES */
+/* METALS */
 
 for(let m of metals){
 
-let r=await fetch(
-"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]
-);
-
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]);
 let d=await r.json();
-
 let q=d.quoteResponse.result[0];
 
-let price=q.regularMarketPrice;
-
 html+=`<span class="metal">
-${m[1]} ${price}
+${m[1]} ${q.regularMarketPrice}
 </span>`;
 
 }
 
-html+=`<span class="up">BA METAL 🚀</span>`;
+/* duplicate so ticker never stops */
 
 document.getElementById("ticker-data").innerHTML=html+html;
 
