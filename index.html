@@ -56,14 +56,14 @@ height:140px;
 
 nav{
 display:flex;
+align-items:center;
 justify-content:center;
-gap:35px;
+gap:30px;
 padding:20px;
 background:#000;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
-z-index:100;
 }
 
 nav a{
@@ -72,12 +72,16 @@ text-decoration:none;
 font-weight:600;
 padding:10px 18px;
 border-radius:6px;
-transition:.25s;
 }
 
 nav a:hover{
 background:#0a84ff;
-transform:scale(1.1);
+}
+
+#clock{
+margin-left:auto;
+color:#0a84ff;
+font-weight:600;
 }
 
 /* HERO */
@@ -105,7 +109,6 @@ background:#0a84ff;
 border-radius:8px;
 color:white;
 text-decoration:none;
-font-weight:600;
 }
 
 /* EARTH */
@@ -125,7 +128,7 @@ background-size:cover;
 box-shadow:0 0 40px #0a84ff,0 0 80px #0a84ff;
 }
 
-/* SECTIONS */
+/* SECTION */
 
 .section{
 max-width:1100px;
@@ -152,12 +155,10 @@ gap:25px;
 background:#111;
 padding:25px;
 border-radius:10px;
-transition:.25s;
 }
 
 .card:hover{
 background:#0a84ff;
-transform:scale(1.05);
 }
 
 /* MACHINES */
@@ -172,12 +173,6 @@ gap:30px;
 background:#111;
 padding:20px;
 border-radius:10px;
-transition:.3s;
-}
-
-.machine:hover{
-transform:scale(1.04);
-box-shadow:0 0 20px #0a84ff;
 }
 
 .machine img{
@@ -199,7 +194,6 @@ input, textarea{
 padding:12px;
 border-radius:6px;
 border:none;
-font-family:Poppins;
 }
 
 button{
@@ -208,12 +202,7 @@ border:none;
 padding:14px;
 border-radius:6px;
 color:white;
-font-weight:600;
 cursor:pointer;
-}
-
-button:hover{
-background:#0070e0;
 }
 
 /* FILE BUTTON */
@@ -225,7 +214,6 @@ background:#0a84ff;
 color:white;
 border-radius:6px;
 cursor:pointer;
-font-weight:600;
 }
 
 .file-upload input{
@@ -246,6 +234,34 @@ margin:auto;
 color:#0a84ff;
 text-decoration:none;
 }
+
+/* TICKER */
+
+#ticker{
+position:fixed;
+bottom:0;
+width:100%;
+background:black;
+border-top:2px solid #0a84ff;
+overflow:hidden;
+font-family:monospace;
+font-size:18px;
+}
+
+.ticker-track{
+display:flex;
+gap:80px;
+white-space:nowrap;
+animation:ticker 40s linear infinite;
+}
+
+@keyframes ticker{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
+}
+
+.up{color:#00ff7b;}
+.down{color:#ff4040;}
 
 footer{
 padding:50px;
@@ -274,6 +290,8 @@ color:#aaa;
 <a href="#industries">Industries</a>
 <a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
+
+<div id="clock"></div>
 
 </nav>
 
@@ -366,8 +384,6 @@ color:#aaa;
 
 <h2>Request a Quote</h2>
 
-<p>Upload your drawing, CAD file, or image and our team will review it.</p>
-
 <form action="https://formsubmit.co/bametal.llc@gmail.com" method="POST" enctype="multipart/form-data">
 
 <input type="text" name="name" placeholder="Your Name" required>
@@ -375,9 +391,11 @@ color:#aaa;
 <input type="email" name="email" placeholder="Your Email" required>
 
 <label class="file-upload">
-Choose Files
-<input type="file" name="attachment" multiple>
+Choose Files (STEP / PDF / Images)
+<input type="file" name="attachment" multiple onchange="updateFileName(this)">
 </label>
+
+<p id="file-name"></p>
 
 <textarea name="message" placeholder="Project details"></textarea>
 
@@ -411,6 +429,77 @@ BA Metal LLC • Precision CNC Machining
 
 </footer>
 
-</body>
+<div id="ticker">
+<div class="ticker-track" id="ticker-data">
+Loading market data...
+</div>
+</div>
 
+<script>
+
+/* CLOCK */
+
+function updateClock(){
+let now = new Date();
+document.getElementById("clock").innerText =
+now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+/* FILE NAME PREVIEW */
+
+function updateFileName(input){
+let text=document.getElementById("file-name");
+
+if(input.files.length==1){
+text.innerText="📎 "+input.files[0].name;
+}
+else if(input.files.length>1){
+text.innerText="📎 "+input.files.length+" files selected";
+}
+}
+
+/* LIVE MARKET DATA */
+
+async function loadMarketData(){
+
+let symbols=["ATI","CRS","KMT","AA","NUE"];
+
+let tickerHTML="";
+
+for(let symbol of symbols){
+
+let response=await fetch(
+"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+symbol
+);
+
+let data=await response.json();
+let quote=data.quoteResponse.result[0];
+
+let price=quote.regularMarketPrice;
+let change=quote.regularMarketChangePercent.toFixed(2);
+
+let className=change>=0?"up":"down";
+
+tickerHTML+=`<span class="${className}">
+${symbol} ${price} (${change}%)
+</span>`;
+}
+
+tickerHTML+=`<span class="up">BA METAL 🚀</span>`;
+
+document.getElementById("ticker-data").innerHTML =
+tickerHTML+tickerHTML;
+
+}
+
+loadMarketData();
+
+setInterval(loadMarketData,300000);
+
+</script>
+
+</body>
 </html>
