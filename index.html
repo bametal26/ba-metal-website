@@ -357,14 +357,20 @@ Upload CAD Files
 </section>
 
 <section class="section" id="contact">
-
 <h2>Contact</h2>
 
 <div style="font-size:18px; line-height:1.8; text-align:center;">
 
-<strong>BA Metal LLC</strong><br>
+<strong>BA Metal LLC</strong><br><br>
 
+<strong>Stephen Andrews</strong><br>
 Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a><br>
+
+<br>
+
+<strong>Nick</strong><br>
+
+<br>
 
 Phone: (248) 555‑0000
 
@@ -438,10 +444,14 @@ let r=await fetch("https://api.allorigins.win/raw?url=https://stooq.com/q/l/?s="
 
 let d=await r.json();
 
+if(!d.symbols || !d.symbols.length) continue;
+
 let q=d.symbols[0];
 
 let price=parseFloat(q.close);
 let open=parseFloat(q.open);
+
+if(!price || !open) continue;
 
 let percent=((price-open)/open)*100;
 
