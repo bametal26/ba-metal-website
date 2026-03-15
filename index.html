@@ -35,7 +35,6 @@ gap:30px;
 padding:18px;
 position:sticky;
 top:0;
-z-index:10;
 border-bottom:1px solid #222;
 }
 
@@ -45,7 +44,7 @@ text-decoration:none;
 font-weight:bold;
 padding:10px 18px;
 border-radius:6px;
-transition:0.25s;
+transition:0.3s;
 }
 
 nav a:hover{
@@ -55,14 +54,13 @@ box-shadow:0 0 10px #0a84ff;
 
 .hero{
 text-align:center;
-padding:140px 20px;
+padding:120px 20px;
 background:#111;
 }
 
 .hero h1{
-font-size:52px;
+font-size:48px;
 margin-bottom:10px;
-animation:fadeUp 1s ease;
 }
 
 .hero p{
@@ -72,20 +70,18 @@ font-size:20px;
 
 .button{
 display:inline-block;
-margin-top:30px;
-padding:15px 30px;
+margin-top:25px;
+padding:14px 28px;
 background:#0a84ff;
 color:white;
 text-decoration:none;
 border-radius:6px;
 font-weight:bold;
-transition:0.25s;
 }
 
 .button:hover{
 background:#0066cc;
-box-shadow:0 0 12px #0a84ff;
-transform:translateY(-2px);
+box-shadow:0 0 10px #0a84ff;
 }
 
 .section{
@@ -93,11 +89,6 @@ max-width:1100px;
 margin:auto;
 padding:90px 20px;
 text-align:center;
-}
-
-.section h2{
-font-size:32px;
-margin-bottom:30px;
 }
 
 .machines{
@@ -113,8 +104,8 @@ background:#151515;
 padding:20px;
 border-radius:10px;
 width:360px;
-transition:0.3s;
 border:1px solid #222;
+transition:0.3s;
 }
 
 .machine:hover{
@@ -127,8 +118,29 @@ width:100%;
 border-radius:6px;
 }
 
-.machine h3{
-margin-top:15px;
+#livebar{
+background:#111;
+border-bottom:1px solid #222;
+display:flex;
+justify-content:center;
+gap:40px;
+padding:10px;
+font-size:14px;
+color:#bbb;
+}
+
+.globe{
+width:150px;
+height:150px;
+border-radius:50%;
+margin:40px auto;
+background:radial-gradient(circle at 30% 30%, #4da6ff, #001f33);
+animation:spin 20s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
 }
 
 footer{
@@ -139,29 +151,26 @@ color:#888;
 margin-top:80px;
 }
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
 </style>
 
 </head>
 
-
 <body>
 
 <header>
-
 <img src="BA Logo.jpg" style="height:160px;">
-
 </header>
+
+
+<div id="livebar">
+
+<div id="greeting"></div>
+
+<div id="clock"></div>
+
+<div id="weather">Loading weather...</div>
+
+</div>
 
 
 <nav>
@@ -182,6 +191,8 @@ transform:translateY(0);
 <p>Prototype to Production</p>
 
 <a class="button" href="#quote">Request a Quote</a>
+
+<div class="globe"></div>
 
 </section>
 
@@ -220,6 +231,7 @@ Engineering Plastics
 <p>Precision vertical machining center for prototype and production machining.</p>
 
 </div>
+
 
 <div class="machine">
 
@@ -266,6 +278,56 @@ Mount Clemens, Michigan
 BA Metal LLC CNC Machining
 
 </footer>
+
+
+<script>
+
+/* greeting */
+
+let hour = new Date().getHours();
+let greet = "Welcome";
+
+if(hour < 12){greet="Good Morning";}
+else if(hour < 18){greet="Good Afternoon";}
+else{greet="Good Evening";}
+
+document.getElementById("greeting").innerText = greet + " — Welcome to BA Metal";
+
+
+/* clock */
+
+function updateClock(){
+let now = new Date();
+document.getElementById("clock").innerText =
+"Local Time: " + now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+
+/* weather */
+
+navigator.geolocation.getCurrentPosition(pos => {
+
+let lat = pos.coords.latitude;
+let lon = pos.coords.longitude;
+
+fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`)
+.then(res => res.json())
+.then(data => {
+
+let temp = data.current_weather.temperature;
+
+document.getElementById("weather").innerText =
+"Temperature: " + temp + "°C";
+
+});
+
+});
+
+</script>
+
 
 </body>
 
