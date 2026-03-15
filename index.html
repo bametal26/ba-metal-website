@@ -569,6 +569,61 @@ document.getElementById("metal-prices").innerHTML=html;
 loadMetals();
 setInterval(loadMetals,300000);
 
+</script>  <!-- LIVE METAL PRICES -->
+
+<div id="metals-bar" style="
+position:fixed;
+bottom:34px;
+width:100%;
+text-align:center;
+font-family:monospace;
+font-size:16px;
+color:white;
+z-index:9998;
+"></div>
+
+<script>
+
+async function loadMetals(){
+
+const metals=[
+{symbol:"HG=F",name:"Copper"},
+{symbol:"ALI=F",name:"Aluminum"},
+{symbol:"NI=F",name:"Nickel"}
+];
+
+let html="";
+
+for(let m of metals){
+
+try{
+
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m.symbol);
+let d=await r.json();
+let q=d.quoteResponse.result[0];
+
+let price=q.regularMarketPrice;
+let change=q.regularMarketChangePercent;
+
+let color=change>=0?"#00ff9d":"#ff4c4c";
+
+html+=`<span style="margin-right:35px;color:${color}">
+${m.name} ${price} (${change.toFixed(2)}%)
+</span>`;
+
+}catch(e){
+html+=`<span>${m.name}</span>`;
+}
+
+}
+
+document.getElementById("metals-bar").innerHTML=html;
+
+}
+
+loadMetals();
+setInterval(loadMetals,300000);
+
 </script>  
 </body>
 </html>
