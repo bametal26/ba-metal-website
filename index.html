@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,35 +21,42 @@ color:white;
 overflow-x:hidden;
 }
 
-/* STAR FIELD */
+/* MOVING STARS */
 
 body::before{
 content:"";
 position:fixed;
-width:100%;
-height:100%;
+top:0;
+left:0;
+width:200%;
+height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
-radial-gradient(#88aaff 1px, transparent 1px),
-radial-gradient(white 1px, transparent 1px);
-background-size:200px 200px,150px 150px,300px 300px;
+radial-gradient(#88aaff 2px, transparent 2px);
+background-size:200px 200px,300px 300px;
+animation:starMove 120s linear infinite;
 opacity:.9;
 z-index:-2;
+}
+
+@keyframes starMove{
+0%{transform:translate(0,0);}
+100%{transform:translate(-800px,-600px);}
 }
 
 /* ROCKET */
 
 .rocket{
 position:absolute;
-font-size:32px;
+font-size:34px;
 top:75%;
 left:-120px;
-animation:fly 14s linear infinite;
+animation:fly 16s linear infinite;
 }
 
 @keyframes fly{
 0%{left:-120px;top:75%;}
-100%{left:120%;top:10%;}
+100%{left:120%;top:15%;}
 }
 
 /* HEADER */
@@ -118,42 +125,44 @@ text-decoration:none;
 
 .solar-system{
 position:relative;
-width:260px;
-height:260px;
+width:300px;
+height:300px;
 margin:120px auto;
 }
 
+/* EARTH */
+
 .earth{
-width:160px;
-height:160px;
+width:180px;
+height:180px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
 position:absolute;
-top:50px;
-left:50px;
+top:60px;
+left:60px;
 box-shadow:0 0 40px #0a84ff;
 }
 
-/* BA LOGO ORBIT */
+/* BA ORBIT */
 
 .ba-orbit{
 position:absolute;
-width:260px;
-height:260px;
+width:300px;
+height:300px;
 animation:orbit 18s linear infinite;
 }
 
 .ba-orbit img{
-width:48px;
+width:50px;
 position:absolute;
 top:0;
-left:105px;
+left:125px;
 }
 
 @keyframes orbit{
-from{transform:rotate(0deg);}
-to{transform:rotate(360deg);}
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 /* SECTION */
@@ -170,50 +179,18 @@ font-family:Orbitron;
 font-size:36px;
 }
 
-/* CAPABILITIES GRID */
-
-.cap-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-margin-top:30px;
-}
-
-.cap{
-background:#111;
-padding:30px;
-border-radius:10px;
-}
-
 /* MACHINES */
-
-.machines{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:30px;
-margin-top:30px;
-}
 
 .machine{
 background:#111;
 padding:20px;
 border-radius:10px;
+margin-top:20px;
 }
 
 .machine img{
 width:100%;
 border-radius:8px;
-}
-
-/* CONTACT */
-
-.contact-box{
-background:#222;
-padding:35px;
-border-radius:10px;
-max-width:450px;
-margin:auto;
-margin-top:20px;
 }
 
 /* STOCK TICKER */
@@ -225,18 +202,18 @@ width:100%;
 background:#000;
 border-top:3px solid #0a84ff;
 overflow:hidden;
-font-family:monospace;
+font-family:"Share Tech Mono";
+font-size:22px;
+height:45px;
+display:flex;
+align-items:center;
 }
 
 .ticker-track{
 display:flex;
-gap:60px;
+gap:80px;
 width:max-content;
-animation:tickerMove 30s linear infinite;
-}
-
-.ticker-track span{
-padding:12px 0;
+animation:tickerMove 25s linear infinite;
 }
 
 @keyframes tickerMove{
@@ -246,6 +223,15 @@ padding:12px 0;
 
 .up{color:#00ff7b;}
 .down{color:#ff4040;}
+
+/* FOOTER */
+
+footer{
+padding:60px;
+text-align:center;
+color:#bbb;
+font-size:18px;
+}
 
 </style>
 
@@ -294,55 +280,12 @@ padding:12px 0;
 
 <h2>Capabilities</h2>
 
-<div class="cap-grid">
-
-<div class="cap">Inconel Machining</div>
-<div class="cap">Titanium Components</div>
-<div class="cap">Hardened Tool Steel</div>
-<div class="cap">High Temperature Alloys</div>
-<div class="cap">Stainless Steel</div>
-<div class="cap">Prototype Development</div>
-
-</div>
-
 </section>
 
-<section class="section" id="machines">
+<footer>
 
-<h2>Machines</h2>
-
-<div class="machines">
-
-<div class="machine">
-<img src="vf0.webp">
-<h3>Haas VF‑0</h3>
-</div>
-
-<div class="machine">
-<img src="jupiter.png">
-<h3>Jupiter Precision Mill</h3>
-</div>
-
-</div>
-
-</section>
-
-<section class="section" id="contact">
-
-<h2>Contact</h2>
-
-<div class="contact-box">
-
-<p>📧 bametal.llc@gmail.com</p>
-<p>📞 Stephen Andrews — Owner</p>
-<p>📞 Nicholas Birchmeier — Owner</p>
-
-</div>
-
-</section>
-
-<footer style="padding:60px;text-align:center;color:#777;">
 BA Metal LLC CNC Machining
+
 </footer>
 
 <div id="ticker">
