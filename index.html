@@ -336,7 +336,7 @@ action="https://formsubmit.co/bametal.llc@gmail.com"
 method="POST"
 enctype="multipart/form-data">
 
-<input type="hidden" name="_next" value="https://bametalcnc.com/?submitted=true#rfq">
+<input type="hidden" name="_next" value="https://bametalcnc.com#submitted">
 <input type="hidden" name="_subject" value="New RFQ Submission - BA Metal Website">
 
 <input type="text" name="name" placeholder="Name" required>
@@ -430,8 +430,9 @@ height="380">
 </div>
 </div>
 <script>
-if(window.location.search.includes("submitted=true")){
-document.getElementById("rfq-success").style.display="block";
+if(window.location.hash === "#submitted"){
+document.getElementById("rfq-success").style.display = "block";
+document.getElementById("rfq-success").scrollIntoView({behavior:"smooth"});
 }
 </script></body>
 </html>
