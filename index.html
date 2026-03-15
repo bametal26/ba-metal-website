@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>BA Metal LLC | Precision CNC Machining</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -170,7 +172,7 @@ width:100%;
 border-radius:10px;
 }
 
-/* RFQ */
+/* RFQ FORM */
 
 .rfq{
 max-width:460px;
@@ -181,6 +183,7 @@ border-radius:10px;
 display:flex;
 flex-direction:column;
 gap:14px;
+box-shadow:0 0 20px rgba(0,0,0,.6);
 }
 
 .rfq input,
@@ -197,6 +200,24 @@ padding:12px;
 border-radius:6px;
 color:white;
 cursor:pointer;
+box-shadow:0 0 10px #1e6fff;
+}
+
+/* FILE BUTTON */
+
+.file-upload{
+background:#1e6fff;
+color:white;
+padding:12px;
+border-radius:6px;
+cursor:pointer;
+text-align:center;
+font-weight:600;
+box-shadow:0 0 10px #1e6fff;
+}
+
+.file-upload input{
+display:none;
 }
 
 /* MAP */
@@ -210,7 +231,7 @@ margin-top:20px;
 
 #metal-bar{
 position:fixed;
-bottom:40px;
+bottom:45px;
 width:100%;
 text-align:center;
 font-family:monospace;
@@ -271,6 +292,7 @@ padding:10px 0;
 <section class="hero" id="home">
 
 <h1>Precision CNC Machining</h1>
+
 <p>Prototype • Production • Hard Materials</p>
 
 <a class="button" href="#rfq">Request a Quote</a>
@@ -328,9 +350,13 @@ method="POST"
 enctype="multipart/form-data">
 
 <input type="text" name="name" placeholder="Name" required>
+
 <input type="email" name="email" placeholder="Email" required>
 
+<label class="file-upload">
+Upload CAD Files
 <input type="file" name="attachment" multiple>
+</label>
 
 <textarea name="message" placeholder="Project details"></textarea>
 
@@ -339,6 +365,7 @@ enctype="multipart/form-data">
 </form>
 
 </section>
+
 <section class="section" id="contact">
 
 <h2>Contact</h2>
@@ -348,15 +375,19 @@ Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a><br>
 Phone: (248) 555‑0000
 </p>
 
-</section><section class="section" id="location">
+</section>
+
+<section class="section" id="location">
 
 <h2>Location</h2>
 
 <p>
+
 BA Metal LLC<br>
 Located inside Nationwide Machinery Sales<br>
 1950 Brinston<br>
 Troy, Michigan 48083
+
 </p>
 
 <iframe
@@ -390,6 +421,7 @@ let html="";
 for(let m of metals){
 
 let arrow=m.change>=0?"▲":"▼";
+
 let color=m.change>=0?"#00ff9d":"#ff4c4c";
 
 html+=`<span style="margin-right:40px;color:${color}">
@@ -419,10 +451,15 @@ for(let s of stocks){
 try{
 
 let r=await fetch("https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
+
 let d=await r.json();
-let q=d.symbols[0];
+
+let q=d.symbols && d.symbols.length ? d.symbols[0] : null;
+
+if(!q) continue;
 
 let price=parseFloat(q.close);
+
 let open=parseFloat(q.open);
 
 let change=((price-open)/open)*100;
@@ -448,6 +485,7 @@ ticker.innerHTML=html+html;
 }
 
 loadStocks();
+
 setInterval(loadStocks,180000);
 
 </script>
