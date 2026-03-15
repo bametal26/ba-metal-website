@@ -408,7 +408,8 @@ let metals = [
 
 let html = "";
 
-/* STOCKS */
+
+/* STOCKS WITH PERCENTAGES */
 
 for(let s of stocks){
 
@@ -421,6 +422,7 @@ let d = await r.json();
 let q = d.quoteResponse.result[0];
 
 let price = q.regularMarketPrice;
+
 let change = q.regularMarketChangePercent;
 
 let cls = change >= 0 ? "up" : "down";
@@ -463,7 +465,12 @@ html += `<span class="metal">${m[1]}</span>`;
 }
 
 
-/* ensure ticker always renders */
+/* YOUR COMPANY */
+
+html += `<span class="up">BA METAL 🚀</span>`;
+
+
+/* duplicate so ticker loops forever */
 
 ticker.innerHTML = html + html;
 
