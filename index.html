@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,50 +21,26 @@ color:white;
 overflow-x:hidden;
 }
 
-/* STAR FIELD */
+/* MOVING STAR BACKGROUND */
 
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:200%;
 height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
-radial-gradient(#88aaff 1px, transparent 1px);
-background-size:180px 180px,300px 300px;
+radial-gradient(#88aaff 2px, transparent 2px);
+background-size:200px 200px,300px 300px;
 animation:stars 120s linear infinite;
-z-index:-2;
+z-index:-1;
 }
 
 @keyframes stars{
 0%{transform:translate(0,0);}
-100%{transform:translate(-800px,-600px);}
-}
-
-/* NAVBAR */
-
-nav{
-display:flex;
-justify-content:center;
-gap:40px;
-padding:18px;
-background:#000;
-border-bottom:2px solid #0a84ff;
-position:sticky;
-top:0;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-weight:600;
-font-size:18px;
-padding:10px 18px;
-border-radius:6px;
-}
-
-nav a:hover{
-background:#0a84ff;
+100%{transform:translate(-900px,-700px);}
 }
 
 /* HEADER */
@@ -76,6 +52,30 @@ padding:30px;
 
 header img{
 height:140px;
+}
+
+/* NAV */
+
+nav{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:20px;
+background:#000;
+border-bottom:2px solid #0a84ff;
+position:sticky;
+top:0;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:600;
+}
+
+nav a:hover{
+color:#0a84ff;
 }
 
 /* HERO */
@@ -91,60 +91,37 @@ font-size:60px;
 }
 
 .hero p{
-color:#ccc;
 font-size:20px;
+color:#ccc;
 }
 
 .button{
 display:inline-block;
 margin-top:20px;
-background:#0a84ff;
 padding:14px 30px;
+background:#0a84ff;
 border-radius:8px;
 color:white;
 text-decoration:none;
 }
 
-/* SOLAR SYSTEM */
+/* BIG EARTH */
 
-.solar{
-position:relative;
-width:320px;
-height:320px;
-margin:100px auto;
+.earth-container{
+margin-top:60px;
+display:flex;
+justify-content:center;
 }
 
 .earth{
-width:200px;
-height:200px;
+width:320px;
+height:320px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
-position:absolute;
-top:60px;
-left:60px;
-box-shadow:0 0 40px #0a84ff;
-}
-
-/* BA METAL ORBIT */
-
-.orbit{
-position:absolute;
-width:320px;
-height:320px;
-animation:orbit 16s linear infinite;
-}
-
-.orbit img{
-width:50px;
-position:absolute;
-top:0;
-left:135px;
-}
-
-@keyframes orbit{
-from{transform:rotate(0deg);}
-to{transform:rotate(360deg);}
+box-shadow:
+0 0 40px #0a84ff,
+0 0 80px #0a84ff;
 }
 
 /* SECTION */
@@ -173,7 +150,7 @@ gap:20px;
 .cap{
 background:#111;
 padding:25px;
-border-radius:8px;
+border-radius:10px;
 }
 
 /* MACHINES */
@@ -214,18 +191,18 @@ width:100%;
 background:black;
 border-top:3px solid #0a84ff;
 overflow:hidden;
-font-family:"Share Tech Mono";
+font-family:monospace;
 font-size:20px;
 }
 
 .ticker-track{
 display:flex;
 gap:80px;
-animation:scroll 40s linear infinite;
 white-space:nowrap;
+animation:ticker 35s linear infinite;
 }
 
-@keyframes scroll{
+@keyframes ticker{
 0%{transform:translateX(0);}
 100%{transform:translateX(-50%);}
 }
@@ -246,9 +223,7 @@ color:#aaa;
 <body>
 
 <header>
-
 <img src="BA Logo.jpg">
-
 </header>
 
 <nav>
@@ -268,14 +243,8 @@ color:#aaa;
 
 <a class="button" href="#contact">Request a Quote</a>
 
-<div class="solar">
-
+<div class="earth-container">
 <div class="earth"></div>
-
-<div class="orbit">
-<img src="BA Logo.jpg">
-</div>
-
 </div>
 
 </section>
@@ -287,7 +256,7 @@ color:#aaa;
 <div class="cap-grid">
 
 <div class="cap">Inconel Machining</div>
-<div class="cap">Titanium Machining</div>
+<div class="cap">Titanium Components</div>
 <div class="cap">Tool Steel</div>
 <div class="cap">Stainless Steel</div>
 <div class="cap">Prototype Development</div>
@@ -313,11 +282,6 @@ color:#aaa;
 <h3>Jupiter Precision Mill</h3>
 </div>
 
-<div class="machine">
-<img src="shop.webp">
-<h3>BA Metal Shop</h3>
-</div>
-
 </div>
 
 </section>
@@ -331,8 +295,10 @@ color:#aaa;
 <p>📧 bametal.llc@gmail.com</p>
 
 <p>📞 Stephen Andrews — Owner</p>
+<p>(586) 484‑0469</p>
 
 <p>📞 Nicholas Birchmeier — Owner</p>
+<p>(810) 293‑9524</p>
 
 </div>
 
@@ -340,7 +306,7 @@ color:#aaa;
 
 <footer>
 
-BA Metal LLC CNC Machining
+BA Metal LLC • CNC Machining
 
 </footer>
 
@@ -365,5 +331,4 @@ BA Metal LLC CNC Machining
 </div>
 
 </body>
-
 </html>
