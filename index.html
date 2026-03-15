@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 
+<!DOCTYPE html>
+<html>
+
 <head>
 
 <title>BA Metal LLC | Precision CNC Machining</title>
@@ -37,18 +40,37 @@ font-weight:bold;
 
 .hero{
 text-align:center;
-padding:120px 20px;
-background:#151515;
+padding:150px 20px;
+background-image:url('cnc-cutting.jpeg');
+background-size:cover;
+background-position:center;
 }
 
 .hero h1{
-font-size:48px;
-margin-bottom:10px;
+font-size:50px;
 }
 
-.hero p{
-font-size:20px;
-color:#bbb;
+.section{
+max-width:1000px;
+margin:auto;
+padding:80px 20px;
+}
+
+.machines{
+display:flex;
+flex-wrap:wrap;
+gap:40px;
+justify-content:center;
+}
+
+.machine{
+text-align:center;
+max-width:400px;
+}
+
+.machine img{
+width:100%;
+border-radius:8px;
 }
 
 button{
@@ -58,25 +80,14 @@ border:none;
 color:white;
 font-size:16px;
 cursor:pointer;
-}
-
-.section{
-max-width:900px;
-margin:auto;
-padding:70px 20px;
-}
-
-.section h2{
-margin-bottom:25px;
-font-size:28px;
+margin-top:20px;
 }
 
 footer{
 background:#000;
 text-align:center;
-padding:30px;
+padding:40px;
 margin-top:50px;
-color:#aaa;
 }
 
 </style>
@@ -85,13 +96,11 @@ color:#aaa;
 
 <body>
 
-
 <header>
 
 <img src="BA Logo.jpg" style="height:120px;">
 
 </header>
-
 
 <nav>
 
@@ -140,12 +149,30 @@ Engineering Plastics
 
 <h2>Machines</h2>
 
-<p>
+<div class="machines">
 
-Haas VF‑0<br>
-Jupiter Precision Mill
+<div class="machine">
 
-</p>
+<img src="vf0.webp">
+
+<h3>Haas VF‑0</h3>
+
+<p>Precision vertical machining center used for prototype and production machining.</p>
+
+</div>
+
+
+<div class="machine">
+
+<img src="jupiter.png">
+
+<h3>Jupiter Precision Mill</h3>
+
+<p>High‑accuracy machining for tight tolerance components.</p>
+
+</div>
+
+</div>
 
 </section>
 
@@ -154,7 +181,7 @@ Jupiter Precision Mill
 
 <h2>Send Prints for Quote</h2>
 
-<p>Email your drawings or STEP files to:</p>
+<p>Email drawings or STEP files to:</p>
 
 <p><b>bametal.llc@gmail.com</b></p>
 
@@ -164,8 +191,8 @@ Jupiter Precision Mill
 
 <li>Material</li>
 <li>Quantity</li>
-<li>Lead Time</li>
-<li>Project Notes</li>
+<li>Lead time</li>
+<li>Project notes</li>
 
 </ul>
 
