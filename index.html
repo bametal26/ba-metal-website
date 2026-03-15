@@ -7,7 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <style>
 
@@ -21,7 +23,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* STAR BACKGROUND */
+/* STARS */
 
 body::before{
 content:"";
@@ -31,9 +33,9 @@ height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
 radial-gradient(#88aaff 2px, transparent 2px);
-background-size:200px 200px,300px 300px;
+background-size:180px 180px,260px 260px;
 animation:stars 120s linear infinite;
-z-index:-1;
+z-index:-2;
 }
 
 @keyframes stars{
@@ -41,37 +43,56 @@ z-index:-1;
 100%{transform:translate(-900px,-700px);}
 }
 
+/* SHOOTING STAR */
+
+.shooting-star{
+position:fixed;
+width:2px;
+height:80px;
+background:linear-gradient(white,transparent);
+transform:rotate(45deg);
+animation:shoot 6s linear infinite;
+opacity:.8;
+}
+
+@keyframes shoot{
+0%{top:-10%;left:120%}
+100%{top:120%;left:-20%}
+}
+
 /* HEADER */
 
 header{
 text-align:center;
-padding:30px;
+padding:25px;
 }
 
 header img{
-height:140px;
+height:120px;
 }
 
 /* NAV */
 
 nav{
 display:flex;
-align-items:center;
 justify-content:center;
-gap:30px;
-padding:20px;
+align-items:center;
+gap:40px;
+padding:18px;
 background:#000;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
+z-index:100;
 }
 
 nav a{
 color:white;
 text-decoration:none;
 font-weight:600;
-padding:10px 18px;
+padding:8px 14px;
 border-radius:6px;
+transition:.25s;
 }
 
 nav a:hover{
@@ -79,9 +100,15 @@ background:#0a84ff;
 }
 
 #clock{
-margin-left:auto;
-color:#0a84ff;
-font-weight:600;
+position:absolute;
+right:30px;
+font-family:Orbitron;
+font-size:18px;
+color:#00eaff;
+padding:6px 14px;
+border:1px solid #0a84ff;
+border-radius:6px;
+box-shadow:0 0 10px #0a84ff;
 }
 
 /* HERO */
@@ -93,39 +120,48 @@ padding:80px 20px;
 
 .hero h1{
 font-family:Orbitron;
-font-size:60px;
+font-size:58px;
 }
 
 .hero p{
-font-size:20px;
 color:#ccc;
 }
+
+/* GLOBE */
+
+#globe{
+width:320px;
+height:320px;
+margin:auto;
+}
+
+/* SATELLITE */
+
+.satellite{
+position:absolute;
+width:14px;
+height:14px;
+background:#00eaff;
+border-radius:50%;
+box-shadow:0 0 10px #00eaff;
+animation:orbit 14s linear infinite;
+}
+
+@keyframes orbit{
+0%{transform:rotate(0deg) translateX(180px) rotate(0deg)}
+100%{transform:rotate(360deg) translateX(180px) rotate(-360deg)}
+}
+
+/* BUTTON */
 
 .button{
 display:inline-block;
 margin-top:20px;
-padding:14px 32px;
+padding:14px 30px;
 background:#0a84ff;
-border-radius:8px;
-color:white;
+border-radius:6px;
 text-decoration:none;
-}
-
-/* EARTH */
-
-.earth-container{
-margin-top:60px;
-display:flex;
-justify-content:center;
-}
-
-.earth{
-width:320px;
-height:320px;
-border-radius:50%;
-background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
-background-size:cover;
-box-shadow:0 0 40px #0a84ff,0 0 80px #0a84ff;
+color:white;
 }
 
 /* SECTION */
@@ -139,7 +175,7 @@ text-align:center;
 
 .section h2{
 font-family:Orbitron;
-font-size:36px;
+font-size:34px;
 margin-bottom:40px;
 }
 
@@ -155,6 +191,7 @@ gap:25px;
 background:#111;
 padding:25px;
 border-radius:10px;
+transition:.25s;
 }
 
 .card:hover{
@@ -165,7 +202,7 @@ background:#0a84ff;
 
 .machine-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:30px;
 }
 
@@ -180,7 +217,7 @@ width:100%;
 border-radius:8px;
 }
 
-/* RFQ FORM */
+/* RFQ */
 
 form{
 display:flex;
@@ -190,7 +227,7 @@ max-width:500px;
 margin:auto;
 }
 
-input, textarea{
+input,textarea{
 padding:12px;
 border-radius:6px;
 border:none;
@@ -202,37 +239,20 @@ border:none;
 padding:14px;
 border-radius:6px;
 color:white;
-cursor:pointer;
 }
 
 /* FILE BUTTON */
 
 .file-upload{
 display:inline-block;
-padding:12px 22px;
+padding:12px 20px;
 background:#0a84ff;
-color:white;
 border-radius:6px;
 cursor:pointer;
 }
 
 .file-upload input{
 display:none;
-}
-
-/* CONTACT */
-
-.contact-box{
-background:#222;
-padding:30px;
-border-radius:10px;
-max-width:420px;
-margin:auto;
-}
-
-.contact-box a{
-color:#0a84ff;
-text-decoration:none;
 }
 
 /* TICKER */
@@ -245,23 +265,22 @@ background:black;
 border-top:2px solid #0a84ff;
 overflow:hidden;
 font-family:monospace;
-font-size:18px;
 }
 
 .ticker-track{
 display:flex;
 gap:80px;
 white-space:nowrap;
-animation:ticker 40s linear infinite;
+animation:ticker 45s linear infinite;
 }
 
 @keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
 }
 
-.up{color:#00ff7b;}
-.down{color:#ff4040;}
+.up{color:#00ff7b}
+.down{color:#ff4040}
 
 footer{
 padding:50px;
@@ -275,10 +294,10 @@ color:#aaa;
 
 <body>
 
+<div class="shooting-star"></div>
+
 <header>
-
 <img src="BA Logo.jpg">
-
 </header>
 
 <nav>
@@ -303,9 +322,9 @@ color:#aaa;
 
 <a class="button" href="#rfq">Request a Quote</a>
 
-<div class="earth-container">
-<div class="earth"></div>
-</div>
+<div id="globe"></div>
+
+<div class="satellite"></div>
 
 </section>
 
@@ -353,7 +372,7 @@ color:#aaa;
 <div class="grid">
 
 <div class="card">Aluminum</div>
-<div class="card">Stainless Steel</div>
+<div class="card">Nickel Alloys</div>
 <div class="card">Titanium</div>
 <div class="card">Inconel</div>
 <div class="card">Tool Steel</div>
@@ -391,7 +410,7 @@ color:#aaa;
 <input type="email" name="email" placeholder="Your Email" required>
 
 <label class="file-upload">
-Choose Files (STEP / PDF / Images)
+Choose Files
 <input type="file" name="attachment" multiple onchange="updateFileName(this)">
 </label>
 
@@ -404,22 +423,6 @@ Choose Files (STEP / PDF / Images)
 <button type="submit">Submit RFQ</button>
 
 </form>
-
-</section>
-
-<section class="section" id="contact">
-
-<h2>Contact</h2>
-
-<div class="contact-box">
-
-<p>📧 <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a></p>
-
-<p>📞 <a href="tel:15864840469">Stephen Andrews — (586) 484‑0469</a></p>
-
-<p>📞 <a href="tel:18102939524">Nicholas Birchmeier — (810) 293‑9524</a></p>
-
-</div>
 
 </section>
 
@@ -440,66 +443,73 @@ Loading market data...
 /* CLOCK */
 
 function updateClock(){
-let now = new Date();
-document.getElementById("clock").innerText =
-now.toLocaleTimeString();
+document.getElementById("clock").innerText=
+new Date().toLocaleTimeString();
 }
 
 setInterval(updateClock,1000);
 updateClock();
 
-/* FILE NAME PREVIEW */
+/* FILE NAME */
 
 function updateFileName(input){
+
 let text=document.getElementById("file-name");
 
-if(input.files.length==1){
+if(input.files.length===1){
 text.innerText="📎 "+input.files[0].name;
 }
-else if(input.files.length>1){
+
+else{
 text.innerText="📎 "+input.files.length+" files selected";
 }
-}
-
-/* LIVE MARKET DATA */
-
-async function loadMarketData(){
-
-let symbols=["ATI","CRS","KMT","AA","NUE"];
-
-let tickerHTML="";
-
-for(let symbol of symbols){
-
-let response=await fetch(
-"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+symbol
-);
-
-let data=await response.json();
-let quote=data.quoteResponse.result[0];
-
-let price=quote.regularMarketPrice;
-let change=quote.regularMarketChangePercent.toFixed(2);
-
-let className=change>=0?"up":"down";
-
-tickerHTML+=`<span class="${className}">
-${symbol} ${price} (${change}%)
-</span>`;
-}
-
-tickerHTML+=`<span class="up">BA METAL 🚀</span>`;
-
-document.getElementById("ticker-data").innerHTML =
-tickerHTML+tickerHTML;
 
 }
 
-loadMarketData();
+/* STOCK + METAL TICKER */
 
-setInterval(loadMarketData,300000);
+async function loadMarket(){
+
+let symbols=["ATI","CRS","AA","NUE","BHP","RIO"];
+
+let html="";
+
+for(let s of symbols){
+
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
+
+let d=await r.json();
+
+let q=d.quoteResponse.result[0];
+
+let price=q.regularMarketPrice;
+
+let change=q.regularMarketChangePercent.toFixed(2);
+
+let c=change>=0?"up":"down";
+
+html+=`<span class="${c}">${s} ${price} (${change}%)</span>`;
+
+}
+
+/* metal prices */
+
+html+=`<span class="up">Nickel Market</span>`;
+html+=`<span class="up">Copper Market</span>`;
+html+=`<span class="up">Aluminum Market</span>`;
+
+html+=`<span class="up">BA METAL 🚀</span>`;
+
+document.getElementById("ticker-data").innerHTML=html+html;
+
+}
+
+loadMarket();
+
+setInterval(loadMarket,300000);
 
 </script>
 
 </body>
+
 </html>
