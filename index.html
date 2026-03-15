@@ -21,13 +21,11 @@ color:white;
 overflow-x:hidden;
 }
 
-/* MOVING STAR BACKGROUND */
+/* MOVING STARS */
 
 body::before{
 content:"";
 position:fixed;
-top:0;
-left:0;
 width:200%;
 height:200%;
 background-image:
@@ -54,7 +52,7 @@ header img{
 height:140px;
 }
 
-/* NAV */
+/* NAVBAR */
 
 nav{
 display:flex;
@@ -65,6 +63,7 @@ background:#000;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
+z-index:10;
 }
 
 nav a{
@@ -72,10 +71,14 @@ color:white;
 text-decoration:none;
 font-size:18px;
 font-weight:600;
+padding:10px 20px;
+border-radius:6px;
+transition:.25s;
 }
 
 nav a:hover{
-color:#0a84ff;
+background:#0a84ff;
+transform:scale(1.1);
 }
 
 /* HERO */
@@ -136,21 +139,27 @@ text-align:center;
 .section h2{
 font-family:Orbitron;
 font-size:36px;
-margin-bottom:30px;
+margin-bottom:40px;
 }
 
-/* CAPABILITIES */
+/* CAPABILITIES GRID (3 rows evenly) */
 
 .cap-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
 }
 
 .cap{
 background:#111;
 padding:25px;
 border-radius:10px;
+transition:.25s;
+}
+
+.cap:hover{
+background:#0a84ff;
+transform:scale(1.05);
 }
 
 /* MACHINES */
@@ -165,6 +174,12 @@ gap:30px;
 background:#111;
 padding:20px;
 border-radius:10px;
+transition:.3s;
+}
+
+.machine:hover{
+transform:scale(1.03);
+box-shadow:0 0 20px #0a84ff;
 }
 
 .machine img{
@@ -180,6 +195,15 @@ padding:30px;
 border-radius:10px;
 max-width:420px;
 margin:auto;
+}
+
+.contact-box a{
+color:#0a84ff;
+text-decoration:none;
+}
+
+.contact-box a:hover{
+text-decoration:underline;
 }
 
 /* STOCK TICKER */
@@ -258,6 +282,7 @@ color:#aaa;
 <div class="cap">Inconel Machining</div>
 <div class="cap">Titanium Components</div>
 <div class="cap">Tool Steel</div>
+
 <div class="cap">Stainless Steel</div>
 <div class="cap">Prototype Development</div>
 <div class="cap">Tight Tolerance Parts</div>
@@ -292,13 +317,11 @@ color:#aaa;
 
 <div class="contact-box">
 
-<p>📧 bametal.llc@gmail.com</p>
+<p>📧 <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a></p>
 
-<p>📞 Stephen Andrews — Owner</p>
-<p>(586) 484‑0469</p>
+<p>📞 <a href="tel:15864840469">Stephen Andrews — (586) 484‑0469</a></p>
 
-<p>📞 Nicholas Birchmeier — Owner</p>
-<p>(810) 293‑9524</p>
+<p>📞 <a href="tel:18102939524">Nicholas Birchmeier — (810) 293‑9524</a></p>
 
 </div>
 
