@@ -19,7 +19,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* STAR BACKGROUND */
+/* SPACE BACKGROUND */
 
 body::before{
 content:"";
@@ -62,7 +62,6 @@ font-weight:700;
 #clock{
 font-family:"Share Tech Mono";
 font-size:24px;
-letter-spacing:2px;
 }
 
 /* NAV */
@@ -89,80 +88,73 @@ transition:0.25s;
 nav a:hover{
 background:#0a84ff;
 transform:scale(1.2);
-box-shadow:0 0 18px #0a84ff;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:100px 20px 40px;
+padding:80px 20px 40px;
 }
 
 .hero h1{
 font-family:Orbitron;
-font-size:64px;
+font-size:60px;
 }
 
 .hero p{
-font-size:24px;
+font-size:22px;
 color:#ccc;
 }
 
 .button{
 display:inline-block;
 margin-top:30px;
-padding:18px 38px;
+padding:16px 34px;
 background:#0a84ff;
 border-radius:8px;
 color:white;
 font-weight:600;
 text-decoration:none;
-transition:0.3s;
-}
-
-.button:hover{
-transform:translateY(-4px);
-box-shadow:0 0 20px #0a84ff;
 }
 
 /* PLANET */
 
 .planet-system{
 position:relative;
-width:240px;
-height:240px;
-margin:70px auto;
+width:220px;
+height:220px;
+margin:90px auto 60px;
 }
 
 .earth{
-width:160px;
-height:160px;
+width:150px;
+height:150px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
 position:absolute;
-top:40px;
-left:40px;
+top:35px;
+left:35px;
 box-shadow:0 0 25px #0a84ff;
 }
 
 .logo-orbit{
 position:absolute;
-width:45px;
-height:45px;
+width:40px;
+height:40px;
 border-radius:50%;
-animation:orbit 14s linear infinite;
+animation:orbit 16s linear infinite;
 }
 
 @keyframes orbit{
 
 0%{
-transform:rotate(0deg) translateX(95px) rotate(0deg);
+transform:rotate(0deg) translateX(85px) rotate(0deg);
 }
 
 100%{
-transform:rotate(360deg) translateX(95px) rotate(-360deg);
+transform:rotate(360deg) translateX(85px) rotate(-360deg);
 }
 
 }
@@ -178,7 +170,7 @@ text-align:center;
 
 .section h2{
 font-family:Orbitron;
-font-size:38px;
+font-size:36px;
 margin-bottom:40px;
 }
 
@@ -200,95 +192,59 @@ transition:0.35s;
 }
 
 .cap:hover{
-transform:translateY(-10px) scale(1.05);
-box-shadow:0 15px 30px rgba(0,0,0,0.7);
+transform:translateY(-8px);
 background:#151515;
-}
-
-/* MACHINES */
-
-.machines{
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-}
-
-.machine{
-background:#111;
-padding:20px;
-border-radius:12px;
-width:360px;
-border:1px solid #222;
-transition:0.35s;
-}
-
-.machine:hover{
-transform:translateY(-12px) scale(1.04);
-box-shadow:0 15px 35px rgba(0,0,0,0.8);
-}
-
-.machine img{
-width:100%;
-border-radius:10px;
 }
 
 /* CONTACT */
 
 .contact-box{
-background:#111;
-padding:30px;
+background:#2a2a2a;
+padding:35px;
 border-radius:12px;
-border:1px solid #222;
-max-width:500px;
+max-width:450px;
 margin:auto;
 }
 
-.owner{
+.contact-item{
 margin-top:15px;
 font-size:18px;
 }
 
-/* MARKET TICKER */
+/* TICKER */
 
 #ticker{
 position:fixed;
 bottom:0;
 width:100%;
-background:black;
-border-top:2px solid #0a84ff;
-padding:14px 0;
+background:#000;
+border-top:3px solid #0a84ff;
 font-family:"Share Tech Mono";
 font-size:18px;
 overflow:hidden;
+}
+
+.ticker-track{
+display:flex;
+gap:50px;
+padding:12px 20px;
+animation:scroll 25s linear infinite;
 white-space:nowrap;
 }
 
-#ticker span{
-display:inline-block;
-padding-left:100%;
-animation:ticker 28s linear infinite;
+@keyframes scroll{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
 }
 
-.up{
-color:#00ff6a;
-}
-
-.down{
-color:#ff4040;
-}
-
-@keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
+.up{color:#00ff7b;}
+.down{color:#ff4040;}
+.bametal{color:#0a84ff;font-weight:700;}
 
 footer{
 padding:60px;
 text-align:center;
 color:#777;
-border-top:1px solid #222;
-margin-top:80px;
 }
 
 </style>
@@ -313,7 +269,7 @@ margin-top:80px;
 <a href="#contact">Contact</a>
 </nav>
 
-<section class="hero" id="home">
+<section class="hero">
 
 <h1>Advanced CNC Machining</h1>
 <p>Prototype • Production • Hard Materials</p>
@@ -327,7 +283,7 @@ margin-top:80px;
 
 </section>
 
-<section class="section" id="capabilities">
+<section class="section">
 
 <h2>Capabilities</h2>
 
@@ -346,43 +302,24 @@ margin-top:80px;
 
 </section>
 
-<section class="section" id="machines">
-
-<h2>Machines</h2>
-
-<div class="machines">
-
-<div class="machine">
-<img src="vf0.webp">
-<h3>Haas VF‑0</h3>
-</div>
-
-<div class="machine">
-<img src="jupiter.png">
-<h3>Jupiter Precision Mill</h3>
-</div>
-
-</div>
-
-</section>
-
 <section class="section" id="contact">
 
 <h2>Contact</h2>
 
 <div class="contact-box">
 
-<p>Email</p>
-<p><b>bametal.llc@gmail.com</b></p>
+<div class="contact-item">
+📧 <b>bametal.llc@gmail.com</b>
+</div>
 
-<div class="owner">
-Owner — Stephen Andrews  
+<div class="contact-item">
+📞 Stephen Andrews — Owner  
 <br>
 (586) 484‑0469
 </div>
 
-<div class="owner">
-Owner — Nick  
+<div class="contact-item">
+📞 Nicholas Birchmeier — Owner  
 <br>
 (810) 293‑9524
 </div>
@@ -397,19 +334,19 @@ BA Metal LLC CNC Machining
 
 <div id="ticker">
 
-<span>
+<div class="ticker-track">
 
-LIVE MARKET ►  
+<span class="up">ATI Metals ▲2.4%</span>
+<span class="up">Carpenter Tech ▲1.8%</span>
+<span class="down">Kennametal ▼0.6%</span>
+<span class="up">Alcoa ▲3.2%</span>
+<span class="up">Nvidia ▲1.1%</span>
+<span class="up">Dow Jones ▲0.45%</span>
+<span class="down">Intel ▼0.52%</span>
 
-ATI Metals <span class="up">▲2.4%</span> •  
-Carpenter Technology <span class="up">▲1.8%</span> •  
-Kennametal <span class="down">▼0.6%</span> •  
-Alcoa <span class="up">▲3.2%</span> •  
-Nvidia <span class="up">▲1.1%</span> •  
-Dow Jones <span class="up">▲0.45%</span> •  
-S&P 500 <span class="up">▲0.52%</span>
+<span class="bametal" id="bametal">BA METAL ▲5.0%</span>
 
-</span>
+</div>
 
 </div>
 
@@ -432,6 +369,28 @@ document.getElementById("clock").innerText=now.toLocaleTimeString();
 
 setInterval(updateClock,1000);
 updateClock();
+
+/* BA Metal stock animation */
+
+function updateBAMetal(){
+
+let percent=(Math.random()*4+1).toFixed(2);
+
+let up=Math.random()>0.4;
+
+let el=document.getElementById("bametal");
+
+if(up){
+el.innerText="BA METAL ▲"+percent+"%";
+el.className="bametal up";
+}else{
+el.innerText="BA METAL ▼"+percent+"%";
+el.className="bametal down";
+}
+
+}
+
+setInterval(updateBAMetal,5000);
 
 </script>
 
