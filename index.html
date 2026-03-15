@@ -359,20 +359,24 @@ Upload CAD Files
 <section class="section" id="contact">
 <h2>Contact</h2>
 
-<div style="font-size:18px; line-height:1.8; text-align:center;">
+<div style="
+font-size:18px;
+line-height:1.6;
+max-width:420px;
+margin:20px auto;
+text-align:center;
+">
 
 <strong>BA Metal LLC</strong><br><br>
 
 <strong>Stephen Andrews</strong><br>
-Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a><br>
+Phone: (586) 484‑0469<br>
+Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a>
 
-<br>
+<br><br>
 
 <strong>Nick</strong><br>
-
-<br>
-
-Phone: (248) 555‑0000
+Phone: (810) 293‑9524
 
 </div>
 
@@ -440,7 +444,7 @@ for(let s of stocks){
 
 try{
 
-let r=await fetch("https://api.allorigins.win/raw?url=https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
+let r=await fetch("https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
 
 let d=await r.json();
 
@@ -451,9 +455,8 @@ let q=d.symbols[0];
 let price=parseFloat(q.close);
 let open=parseFloat(q.open);
 
-if(!price || !open) continue;
-
 let percent=((price-open)/open)*100;
+percent = percent || 0;
 
 let cls=percent>=0?"up":"down";
 
