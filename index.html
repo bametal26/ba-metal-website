@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>BA Metal LLC | Precision CNC Machining</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -227,8 +225,6 @@ border-radius:10px;
 margin-top:20px;
 }
 
-
-
 /* STOCK TICKER */
 
 #ticker{
@@ -237,26 +233,8 @@ bottom:0;
 width:100%;
 background:black;
 border-top:3px solid #1e6fff;
-overflow:hidden;
+z-index:9999;
 }
-
-.ticker{
-white-space:nowrap;
-display:inline-block;
-animation:tickerMove 45s linear infinite;
-font-family:monospace;
-font-size:20px;
-padding:10px 0;
-}
-
-@keyframes tickerMove{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-
-.up{color:#00ff9d;font-weight:bold;margin-right:80px;}
-.down{color:#ff4c4c;font-weight:bold;margin-right:80px;}
-.metal{color:#1e90ff;font-weight:bold;margin-right:80px;}
 
 </style>
 </head>
@@ -282,13 +260,11 @@ padding:10px 0;
 <section class="hero" id="home">
 
 <h1>Precision CNC Machining</h1>
-
 <p>Prototype • Production • Hard Materials</p>
 
 <a class="button" href="#rfq">Request a Quote</a>
 
 <div class="earth"></div>
-
 <div class="rocket">🚀</div>
 
 </section>
@@ -307,7 +283,6 @@ padding:10px 0;
 <div class="card">±0.0005 Tolerance</div>
 
 </div>
-
 </section>
 
 <section class="section" id="machines">
@@ -327,7 +302,6 @@ padding:10px 0;
 </div>
 
 </div>
-
 </section>
 
 <section class="section" id="rfq">
@@ -353,25 +327,19 @@ Upload CAD Files
 <button type="submit">Submit RFQ</button>
 
 </form>
-
 </section>
 
 <section class="section" id="contact">
+
 <h2>Contact</h2>
 
-<div style="
-font-size:18px;
-line-height:1.6;
-max-width:420px;
-margin:20px auto;
-text-align:center;
-">
+<div style="font-size:18px; line-height:1.6; max-width:420px; margin:20px auto;">
 
 <strong>BA Metal LLC</strong><br><br>
 
 <strong>Stephen Andrews</strong><br>
 Phone: (586) 484‑0469<br>
-Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a>
+Email: bametal.llc@gmail.com
 
 <br><br>
 
@@ -381,6 +349,7 @@ Phone: (810) 293‑9524
 </div>
 
 </section>
+
 <section class="section" id="location">
 
 <h2>Location</h2>
@@ -402,86 +371,44 @@ height="400">
 
 </section>
 
+<!-- LIVE STOCK + METAL TICKER -->
 
 <div id="ticker">
-<div class="ticker" id="ticker-data"></div>
-</div>
 
-<script>
+<div class="tradingview-widget-container">
 
-/* MARKET TICKER */
+<div class="tradingview-widget-container__widget"></div>
 
-async function loadMarket(){
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
 
-let ticker=document.getElementById("ticker-data");
+{
+"symbols":[
 
-let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
+{"description":"Copper","proName":"COMEX:HG1!"},
+{"description":"Aluminum","proName":"LME:AH1!"},
+{"description":"Nickel","proName":"LME:NI1!"},
 
-let metals=[
-{name:"Copper",price:4.05,change:0.22},
-{name:"Aluminum",price:1.02,change:-0.11},
-{name:"Nickel",price:18240,change:0.31}
-];
+{"description":"ATI","proName":"NYSE:ATI"},
+{"description":"CRS","proName":"NYSE:CRS"},
+{"description":"ALCOA","proName":"NYSE:AA"},
+{"description":"NUCOR","proName":"NYSE:NUE"},
+{"description":"BHP","proName":"NYSE:BHP"},
+{"description":"RIO","proName":"NYSE:RIO"},
+{"description":"KENNAMETAL","proName":"NYSE:KMT"}
 
-let html="";
+],
 
-/* METALS */
-
-for(let m of metals){
-
-let arrow=m.change>=0?"▲":"▼";
-let color=m.change>=0?"#00ff9d":"#ff4c4c";
-
-html+=`<span style="margin-right:80px;color:${color};font-weight:bold;">
-${m.name} ${arrow} ${m.price} (${m.change}%)
-</span>`;
+"colorTheme":"dark",
+"isTransparent":true,
+"displayMode":"adaptive",
+"locale":"en"
 
 }
-
-/* STOCKS */
-
-for(let s of stocks){
-
-try{
-
-let r=await fetch("https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
-
-let d=await r.json();
-
-if(!d.symbols || !d.symbols.length) continue;
-
-let q=d.symbols[0];
-
-let price=parseFloat(q.close);
-let open=parseFloat(q.open);
-
-let percent=((price-open)/open)*100;
-percent = percent || 0;
-
-let cls=percent>=0?"up":"down";
-
-html+=`<span class="${cls}">
-${s} ${price.toFixed(2)} (${percent.toFixed(2)}%)
-</span>`;
-
-}catch{
-
-html+=`<span class="up">${s}</span>`;
-
-}
-
-}
-
-html+=`<span class="metal">BA METAL 🚀</span>`;
-
-ticker.innerHTML=html+html;
-
-}
-
-loadMarket();
-
-setInterval(loadMarket,120000);
 
 </script>
+
+</div>
+</div>
+
 </body>
 </html>
