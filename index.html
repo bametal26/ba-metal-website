@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>BA Metal LLC | Precision CNC Machining</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
-.ticker-wrapper{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-border-top:2px solid #1e6fff;
-background:black;
-z-index:9999;
-}  
 body{
 margin:0;
 font-family:Poppins;
@@ -27,26 +16,6 @@ color:white;
 overflow-x:hidden;
 }
 
-.logo{
-position:absolute;
-left:20px;
-display:flex;
-align-items:center;
-gap:10px;
-font-family:Orbitron;
-font-size:20px;
-color:#1e90ff;
-font-weight:bold;
-text-shadow:0 0 10px #1e90ff;
-}
-
-.logo img{
-height:32px;
-}
-
-.logo-img{
-height:28px;
-}
 /* STARFIELD */
 
 body::before{
@@ -95,25 +64,28 @@ background:#1e6fff;
 box-shadow:0 0 10px #1e6fff;
 }
 
-/* CLOCK */
-
-#clock{
+.logo{
 position:absolute;
-right:25px;
+left:20px;
+display:flex;
+align-items:center;
+gap:10px;
 font-family:Orbitron;
-color:#00eaff;
-border:1px solid #1e6fff;
-padding:6px 12px;
-border-radius:6px;
-box-shadow:0 0 10px #1e6fff;
+font-size:20px;
+color:#1e90ff;
+font-weight:bold;
+text-shadow:0 0 10px #1e90ff;
+}
+
+.logo img{
+height:32px;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:50px 20px 20px 20px;
-position:relative;
+padding:60px 20px 20px;
 }
 
 .hero h1{
@@ -198,7 +170,7 @@ width:100%;
 border-radius:10px;
 }
 
-/* RFQ FORM */
+/* RFQ */
 
 .rfq{
 max-width:460px;
@@ -209,7 +181,6 @@ border-radius:10px;
 display:flex;
 flex-direction:column;
 gap:14px;
-box-shadow:0 0 15px rgba(0,0,0,.5);
 }
 
 .rfq input,
@@ -226,43 +197,28 @@ padding:12px;
 border-radius:6px;
 color:white;
 cursor:pointer;
-box-shadow:0 0 10px #1e6fff;
 }
 
-/* FILE BUTTON */
+/* MAP */
 
-.file-upload{
-background:#1e6fff;
-color:white;
-padding:12px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:600;
+iframe{
+border-radius:10px;
+margin-top:20px;
+}
+
+/* METAL BAR */
+
+#metal-bar{
+position:fixed;
+bottom:40px;
+width:100%;
 text-align:center;
-box-shadow:0 0 10px #1e6fff;
+font-family:monospace;
+font-size:16px;
+z-index:9998;
 }
 
-.file-upload input{
-display:none;
-}
-
-/* CONTACT */
-
-.contact{
-margin-top:40px;
-line-height:1.8;
-}
-
-.contact a{
-color:#1e90ff;
-text-decoration:none;
-}
-
-.contact a:hover{
-text-decoration:underline;
-}
-
-/* TICKER */
+/* STOCK TICKER */
 
 #ticker{
 position:fixed;
@@ -271,7 +227,6 @@ width:100%;
 background:black;
 border-top:3px solid #1e6fff;
 overflow:hidden;
-z-index:9999;
 }
 
 .ticker{
@@ -300,7 +255,7 @@ padding:10px 0;
 <nav>
 
 <div class="logo">
-<img src="BA Logo.jpg" alt="BA Metal Logo">
+<img src="BA Logo.jpg">
 <span>BA METAL</span>
 </div>
 
@@ -310,14 +265,12 @@ padding:10px 0;
 <a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
 <a href="#location">Location</a>
-  
 
 </nav>
 
 <section class="hero" id="home">
 
 <h1>Precision CNC Machining</h1>
-
 <p>Prototype • Production • Hard Materials</p>
 
 <a class="button" href="#rfq">Request a Quote</a>
@@ -375,13 +328,9 @@ method="POST"
 enctype="multipart/form-data">
 
 <input type="text" name="name" placeholder="Name" required>
-
 <input type="email" name="email" placeholder="Email" required>
 
-<label class="file-upload">
-Upload CAD Files
 <input type="file" name="attachment" multiple>
-</label>
 
 <textarea name="message" placeholder="Project details"></textarea>
 
@@ -389,10 +338,9 @@ Upload CAD Files
 
 </form>
 
-<div class="contact" id="contact">
+</section>
 
-<h2>Contact</h2>
-<section id="location">
+<section class="section" id="location">
 
 <h2>Location</h2>
 
@@ -403,244 +351,98 @@ Located inside Nationwide Machinery Sales<br>
 Troy, Michigan 48083
 </p>
 
-<section id="location">
-
-<h2>Location</h2>
-
-<p>
-<strong>BA Metal LLC</strong><br>
-Located inside Nationwide Machinery Sales<br>
-1950 Brinston<br>
-Troy, Michigan 48083
-</p>
-
 <iframe
 src="https://www.google.com/maps?q=1950+Brinston+Troy+Michigan+48083&output=embed"
 width="100%"
-height="400"
-style="border:0;"
-allowfullscreen=""
-loading="lazy">
+height="400">
 </iframe>
 
 </section>
+
+<div id="metal-bar"></div>
+
 <div id="ticker">
-<div class="ticker" id="ticker-data">Loading market data...</div>
+<div class="ticker" id="ticker-data"></div>
 </div>
 
 <script>
-
-/* CLOCK */
-
-function updateClock(){
-document.getElementById("clock").innerText =
-new Date().toLocaleTimeString();
-}
-
-setInterval(updateClock,1000);
-updateClock();
-
-
-/* LIVE STOCK + METAL TICKER */
-
-async function loadMarket(){
-
-let ticker = document.getElementById("ticker-data");
-
-let stocks = ["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
-
-let html = "";
-
-/* STOCK DATA */
-
-for(let s of stocks){
-
-try{
-
-let r = await fetch("https://stooq.com/q/l/?s=" + s.toLowerCase() + ".us&f=sd2t2ohlcv&h&e=json");
-
-let d = await r.json();
-
-let q = d.symbols[0];
-
-let price = parseFloat(q.close);
-
-let open = parseFloat(q.open);
-
-let change = ((price - open) / open) * 100;
-
-let cls = change >= 0 ? "up" : "down";
-
-html+= `<span style="margin-right:35px;color:${color}">
-${m.name} ${arrow} ${price.toFixed(2)} (${change.toFixed(2)}%)
-</span>`;
-
-}catch{
-
-html += `<span class="up">${s}</span>`;
-
-}
-
-}
 
 /* METALS */
 
-html += `<span class="metal">Copper</span>`;
-html += `<span class="metal">Aluminum</span>`;
-html += `<span class="metal">Nickel</span>`;
-
-/* YOUR COMPANY */
-
-html += `<span class="up">BA METAL 🚀</span>`;
-
-/* duplicate ticker for infinite scroll */
-
-ticker.innerHTML = html + html;
-
-}
-
-loadMarket();
-
-setInterval(loadMarket,180000);
-
-</script>
-<!-- LIVE STOCK + METAL TICKER WRAPPER -->
-
-<div class="ticker-wrapper">
-
-<div class="tradingview-widget-container">
-<div class="tradingview-widget-container__widget"></div>
-</div>
-
-<script src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
-{
-"symbols":[
-{"proName":"NYSE:ATI","title":"ATI"},
-{"proName":"NYSE:CRS","title":"CRS"},
-{"proName":"NYSE:AA","title":"ALCOA"},
-{"proName":"NYSE:NUE","title":"NUCOR"},
-{"proName":"NYSE:BHP","title":"BHP"},
-{"proName":"NYSE:RIO","title":"RIO TINTO"}
-]
-}
-</script>
-
-</div><!-- LIVE METAL PRICES -->
-
-<div id="metal-prices" style="
-position:fixed;
-bottom:30px;
-width:100%;
-text-align:center;
-font-family:monospace;
-font-size:16px;
-color:white;
-z-index:9998;
-"></div>
-
-<script>
-
-async function loadMetals(){
+function loadMetals(){
 
 const metals=[
 {name:"Copper",price:4.05,change:0.22},
 {name:"Aluminum",price:1.02,change:-0.11},
 {name:"Nickel",price:18240,change:0.31}
 ];
-];
 
 let html="";
 
 for(let m of metals){
 
-let arrow = m.change >= 0 ? "▲" : "▼";
-let color = m.change >= 0 ? "#00ff9d" : "#ff4c4c";
+let arrow=m.change>=0?"▲":"▼";
+let color=m.change>=0?"#00ff9d":"#ff4c4c";
 
-html += `<span style="margin-right:30px;color:${color}">
-html += `<span style="margin-right:30px;color:${color}">
+html+=`<span style="margin-right:40px;color:${color}">
 ${m.name} ${arrow} ${m.price} (${m.change}%)
 </span>`;
-}
-try{
-let r = await fetch(...)
-let d = await r.json()
-let q = d.quoteResponse.result[0]
-...
-}catch(e){
-html+=`<span>${m.name}</span>`;
-}
-html += `<span style="margin-right:30px;color:${color}">
-${m.name} ${arrow} ${price.toFixed(2)} (${change.toFixed(2)}%)
-</span>`;
-
-}catch(e){
-html+=`<span>${m.name}</span>`;
-}
 
 }
 
-document.getElementById("metal-prices").innerHTML=html;
+document.getElementById("metal-bar").innerHTML=html;
 
 }
 
 loadMetals();
-setInterval(loadMetals,300000);
 
-</script>  <!-- LIVE METAL PRICES -->
+/* STOCKS */
 
-<div id="metals-bar" style="
-position:fixed;
-bottom:34px;
-width:100%;
-text-align:center;
-font-family:monospace;
-font-size:16px;
-color:white;
-z-index:9998;
-"></div>
+async function loadStocks(){
 
-<script>
+let ticker=document.getElementById("ticker-data");
 
-async function loadMetals(){
-
-const metals=[
-{symbol:"HG=F",name:"Copper"},
-{symbol:"ALI=F",name:"Aluminum"},
-{symbol:"NI=F",name:"Nickel"}
-];
+let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
 
 let html="";
 
-for(let m of metals){
+for(let s of stocks){
 
 try{
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m.symbol);
+let r=await fetch("https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
 let d=await r.json();
-let q=d.quoteResponse.result[0];
+let q=d.symbols[0];
 
-let price=q.regularMarketPrice;
-let change=q.regularMarketChangePercent;
+let price=parseFloat(q.close);
+let open=parseFloat(q.open);
 
-let color=change>=0?"#00ff9d":"#ff4c4c";
+let change=((price-open)/open)*100;
 
-html+=`<span style="margin-right:35px;color:${color}">
-${m.name} ${price} (${change.toFixed(2)}%)
+let cls=change>=0?"up":"down";
+
+html+=`<span class="${cls}">
+${s} ${price.toFixed(2)} (${change.toFixed(2)}%)
 </span>`;
 
-}catch(e){
-html+=`<span>${m.name}</span>`;
-}
+}catch{
+
+html+=`<span class="up">${s}</span>`;
 
 }
 
-document.getElementById("metal-prices").innerHTML=html;
+}
+
+html+=`<span class="metal">BA METAL 🚀</span>`;
+
+ticker.innerHTML=html+html;
 
 }
 
-loadMetals();
-setInterval(loadMetals,300000);
+loadStocks();
+setInterval(loadStocks,180000);
 
-</script>  
+</script>
+
 </body>
 </html>
