@@ -21,13 +21,19 @@ overflow-x:hidden;
 .logo{
 position:absolute;
 left:20px;
+display:flex;
+align-items:center;
+gap:8px;
 font-family:Orbitron;
 font-size:20px;
 color:#1e90ff;
 font-weight:bold;
-letter-spacing:2px;
 text-shadow:0 0 10px #1e90ff;
-}  
+}
+
+.logo-img{
+height:28px;
+}
 /* STARFIELD */
 
 body::before{
@@ -281,6 +287,7 @@ padding:10px 0;
 <nav>
 
 <div class="logo">
+<img src="ba-logo.png" class="logo-img">
 BA METAL
 </div>
 
@@ -406,7 +413,7 @@ setInterval(updateClock,1000);
 updateClock();
 
 
-/* MARKET TICKER */
+/* LIVE STOCK + METAL TICKER */
 
 async function loadMarket(){
 
@@ -414,86 +421,55 @@ let ticker = document.getElementById("ticker-data");
 
 let stocks = ["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
 
-let metals = [
-["HG=F","Copper"],
-["ALI=F","Aluminum"],
-["NI=F","Nickel"]
-];
-
 let html = "";
 
-
-/* STOCKS */
+/* STOCK DATA */
 
 for(let s of stocks){
 
 try{
 
-let r = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
+let r = await fetch("https://stooq.com/q/l/?s=" + s.toLowerCase() + ".us&f=sd2t2ohlcv&h&e=json");
 
 let d = await r.json();
 
-let q = d.quoteResponse.result[0];
+let q = d.symbols[0];
 
-let price = q.regularMarketPrice || "--";
+let price = parseFloat(q.close);
 
-let change = q.regularMarketChangePercent || 0;
+let open = parseFloat(q.open);
+
+let change = ((price - open) / open) * 100;
 
 let cls = change >= 0 ? "up" : "down";
 
 html += `<span class="${cls}">
-${s} ${price} (${change.toFixed(2)}%)
+${s} ${price.toFixed(2)} (${change.toFixed(2)}%)
 </span>`;
 
-}catch(e){
+}catch{
 
-html += `<span class="up">${s} -- (0.00%)</span>`;
-
-}
+html += `<span class="up">${s}</span>`;
 
 }
 
+}
 
 /* METALS */
 
-for(let m of metals){
-
-try{
-
-let r = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]);
-
-let d = await r.json();
-
-let q = d.quoteResponse.result[0];
-
-let price = q.regularMarketPrice || "--";
-
-html += `<span class="metal">
-${m[1]} ${price}
-</span>`;
-
-}catch(e){
-
-html += `<span class="metal">${m[1]} --</span>`;
-
-}
-
-}
-
+html += `<span class="metal">Copper</span>`;
+html += `<span class="metal">Aluminum</span>`;
+html += `<span class="metal">Nickel</span>`;
 
 /* YOUR COMPANY */
 
 html += `<span class="up">BA METAL 🚀</span>`;
 
-
-/* duplicate ticker so it loops */
+/* duplicate ticker for infinite scroll */
 
 ticker.innerHTML = html + html;
 
 }
-
-
-/* run ticker */
 
 loadMarket();
 
