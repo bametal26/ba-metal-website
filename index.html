@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +20,7 @@ color:white;
 header{
 background:#000;
 text-align:center;
-padding:20px;
+padding:30px;
 }
 
 nav{
@@ -33,45 +34,33 @@ color:white;
 margin:0 20px;
 text-decoration:none;
 font-weight:bold;
+font-size:16px;
 }
 
 .hero{
 text-align:center;
-padding:150px 20px;
-background-image:url('cnc-cutting.jpeg');
+padding:200px 20px;
+
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+url('cnc-cutting.jpeg');
+
 background-size:cover;
 background-position:center;
 }
 
 .hero h1{
-font-size:50px;
+font-size:60px;
+margin-bottom:10px;
 }
 
-.section{
-max-width:1000px;
-margin:auto;
-padding:80px 20px;
-}
-
-.machines{
-display:flex;
-flex-wrap:wrap;
-gap:40px;
-justify-content:center;
-}
-
-.machine{
-text-align:center;
-max-width:400px;
-}
-
-.machine img{
-width:100%;
-border-radius:8px;
+.hero p{
+font-size:22px;
+color:#ddd;
 }
 
 button{
-padding:15px 30px;
+padding:16px 32px;
 background:#0a84ff;
 border:none;
 color:white;
@@ -80,24 +69,61 @@ cursor:pointer;
 margin-top:20px;
 }
 
+.section{
+max-width:1100px;
+margin:auto;
+padding:90px 20px;
+}
+
+.section h2{
+font-size:32px;
+margin-bottom:30px;
+text-align:center;
+}
+
+.machines{
+display:flex;
+flex-wrap:wrap;
+gap:60px;
+justify-content:center;
+}
+
+.machine{
+text-align:center;
+max-width:420px;
+}
+
+.machine img{
+width:100%;
+border-radius:8px;
+}
+
+.machine h3{
+margin-top:15px;
+}
+
 footer{
 background:#000;
 text-align:center;
 padding:40px;
-margin-top:50px;
+margin-top:60px;
+color:#aaa;
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
-<img src="BA Logo.jpg" style="height:120px;">
+<img src="BA Logo.jpg" style="height:180px;">
 
 </header>
+
 
 <nav>
 
@@ -108,6 +134,7 @@ margin-top:50px;
 <a href="#contact">Contact</a>
 
 </nav>
+
 
 
 <section class="hero" id="home">
@@ -123,11 +150,12 @@ margin-top:50px;
 </section>
 
 
+
 <section class="section" id="capabilities">
 
 <h2>Capabilities</h2>
 
-<p>
+<p style="text-align:center;font-size:20px;line-height:1.8;">
 
 3‑Axis CNC Milling<br>
 Prototype Machining<br>
@@ -142,11 +170,13 @@ Engineering Plastics
 </section>
 
 
+
 <section class="section" id="machines">
 
 <h2>Machines</h2>
 
 <div class="machines">
+
 
 <div class="machine">
 
@@ -154,7 +184,11 @@ Engineering Plastics
 
 <h3>Haas VF‑0</h3>
 
-<p>Precision vertical machining center used for prototype and production machining.</p>
+<p>
+
+Precision vertical machining center used for prototype and production machining.
+
+</p>
 
 </div>
 
@@ -165,42 +199,52 @@ Engineering Plastics
 
 <h3>Jupiter Precision Mill</h3>
 
-<p>High‑accuracy machining for tight tolerance components.</p>
+<p>
+
+High‑accuracy machining for tight tolerance components.
+
+</p>
 
 </div>
+
 
 </div>
 
 </section>
+
 
 
 <section class="section" id="quote">
 
 <h2>Send Prints for Quote</h2>
 
-<p>Email drawings or STEP files to:</p>
+<p style="text-align:center;font-size:20px;">
 
-<p><b>bametal.llc@gmail.com</b></p>
+Email drawings or STEP files to:
 
-<p>Please include:</p>
+</p>
 
-<ul>
+<p style="text-align:center;font-size:22px;">
 
-<li>Material</li>
-<li>Quantity</li>
-<li>Lead time</li>
-<li>Project notes</li>
+<b>bametal.llc@gmail.com</b>
 
-</ul>
+</p>
+
+<p style="text-align:center">
+
+Please include material, quantity, lead time, and project notes.
+
+</p>
 
 </section>
+
 
 
 <section class="section" id="contact">
 
 <h2>Contact</h2>
 
-<p>
+<p style="text-align:center;font-size:20px;">
 
 BA Metal LLC<br>
 Mount Clemens, Michigan<br>
@@ -211,12 +255,14 @@ Email: bametal.llc@gmail.com
 </section>
 
 
+
 <footer>
 
 BA Metal LLC<br>
 Mount Clemens, Michigan
 
 </footer>
+
 
 
 </body>
