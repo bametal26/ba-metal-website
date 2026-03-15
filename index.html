@@ -371,6 +371,7 @@ Upload CAD Files
 <h2>Contact</h2>
 
 <p>
+<strong>BA Metal LLC</strong><br>
 Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a><br>
 Phone: (248) 555‑0000
 </p>
@@ -406,11 +407,15 @@ height="400">
 
 <script>
 
-/* METALS */
+/* MARKET TICKER */
 
-function loadMetals(){
+async function loadMarket(){
 
-const metals=[
+let ticker=document.getElementById("ticker-data");
+
+let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
+
+let metals=[
 {name:"Copper",price:4.05,change:0.22},
 {name:"Aluminum",price:1.02,change:-0.11},
 {name:"Nickel",price:18240,change:0.31}
@@ -418,51 +423,33 @@ const metals=[
 
 let html="";
 
+/* METALS */
+
 for(let m of metals){
 
 let arrow=m.change>=0?"▲":"▼";
-
 let color=m.change>=0?"#00ff9d":"#ff4c4c";
 
-html+=`<span style="margin-right:40px;color:${color}">
+html+=`<span style="margin-right:80px;color:${color};font-weight:bold;">
 ${m.name} ${arrow} ${m.price} (${m.change}%)
 </span>`;
 
 }
 
-document.getElementById("metal-bar").innerHTML=html;
-
-}
-
-loadMetals();
-
 /* STOCKS */
-
-async function loadStocks(){
-
-let ticker=document.getElementById("ticker-data");
-
-let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
-
-let html="";
 
 for(let s of stocks){
 
 try{
 
-let r=await fetch("https://stooq.com/q/l/?s="+s.toLowerCase()+".us&f=sd2t2ohlcv&h&e=json");
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
 
 let d=await r.json();
 
-let q=d.symbols && d.symbols.length ? d.symbols[0] : null;
+let q=d.quoteResponse.result[0];
 
-if(!q) continue;
-
-let price=parseFloat(q.close);
-
-let open=parseFloat(q.open);
-
-let change=((price-open)/open)*100;
+let price=q.regularMarketPrice;
+let change=q.regularMarketChangePercent;
 
 let cls=change>=0?"up":"down";
 
@@ -484,9 +471,9 @@ ticker.innerHTML=html+html;
 
 }
 
-loadStocks();
+loadMarket();
 
-setInterval(loadStocks,180000);
+setInterval(loadMarket,180000);
 
 </script>
 
