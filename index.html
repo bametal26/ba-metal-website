@@ -409,7 +409,7 @@ let metals = [
 let html = "";
 
 
-/* STOCKS WITH PERCENTAGES */
+/* STOCKS */
 
 for(let s of stocks){
 
@@ -421,9 +421,9 @@ let d = await r.json();
 
 let q = d.quoteResponse.result[0];
 
-let price = q.regularMarketPrice;
+let price = q.regularMarketPrice || "--";
 
-let change = q.regularMarketChangePercent;
+let change = q.regularMarketChangePercent || 0;
 
 let cls = change >= 0 ? "up" : "down";
 
@@ -433,7 +433,7 @@ ${s} ${price} (${change.toFixed(2)}%)
 
 }catch(e){
 
-html += `<span class="up">${s}</span>`;
+html += `<span class="up">${s} -- (0.00%)</span>`;
 
 }
 
@@ -452,13 +452,15 @@ let d = await r.json();
 
 let q = d.quoteResponse.result[0];
 
+let price = q.regularMarketPrice || "--";
+
 html += `<span class="metal">
-${m[1]} ${q.regularMarketPrice}
+${m[1]} ${price}
 </span>`;
 
 }catch(e){
 
-html += `<span class="metal">${m[1]}</span>`;
+html += `<span class="metal">${m[1]} --</span>`;
 
 }
 
@@ -470,18 +472,16 @@ html += `<span class="metal">${m[1]}</span>`;
 html += `<span class="up">BA METAL 🚀</span>`;
 
 
-/* duplicate so ticker loops forever */
+/* duplicate ticker so it loops */
 
 ticker.innerHTML = html + html;
 
 }
 
 
-/* load immediately */
+/* run ticker */
 
 loadMarket();
-
-/* refresh every 3 minutes */
 
 setInterval(loadMarket,180000);
 
