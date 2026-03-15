@@ -6,18 +6,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
 font-family:Poppins;
-background:black;
+background:#05070d;
 color:white;
+overflow-x:hidden;
 }
 
-/* STAR BACKGROUND */
+/* STARFIELD */
 
 body::before{
 content:"";
@@ -26,8 +27,8 @@ width:200%;
 height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
-radial-gradient(#6fa8ff 2px, transparent 2px);
-background-size:200px 200px,300px 300px;
+radial-gradient(#4e8cff 2px, transparent 2px);
+background-size:200px 200px,280px 280px;
 animation:stars 140s linear infinite;
 z-index:-1;
 }
@@ -43,9 +44,9 @@ nav{
 display:flex;
 justify-content:center;
 gap:40px;
-background:black;
 padding:20px;
-border-bottom:2px solid #0a84ff;
+background:black;
+border-bottom:2px solid #1e6fff;
 position:sticky;
 top:0;
 z-index:100;
@@ -58,76 +59,72 @@ font-weight:600;
 }
 
 nav a:hover{
-color:#0a84ff;
-}
-
-/* CLOCK */
-
-#clock{
-position:absolute;
-right:25px;
-font-family:Orbitron;
-color:#00eaff;
-border:1px solid #0a84ff;
-padding:6px 14px;
-border-radius:6px;
+color:#1e6fff;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:40px 20px;
+padding:40px 20px 10px 20px;
 }
 
 .hero h1{
 font-family:Orbitron;
-font-size:55px;
+font-size:56px;
 margin-bottom:10px;
 }
 
 .button{
-background:#0a84ff;
-padding:14px 30px;
+background:#1e6fff;
+padding:14px 28px;
 border-radius:6px;
-color:white;
 text-decoration:none;
+color:white;
 }
 
 /* EARTH */
 
 .earth{
 margin:30px auto;
-width:280px;
-height:280px;
+width:260px;
+height:260px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
-box-shadow:0 0 50px #0a84ff;
+box-shadow:0 0 40px #1e6fff;
 }
 
-/* SECTIONS */
+/* SECTION */
 
 .section{
 max-width:1100px;
 margin:auto;
-padding:60px 20px;
+padding:70px 20px;
 text-align:center;
 }
+
+/* GRID */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:25px;
+gap:30px;
 }
 
 .card{
-background:#111;
+background:#0f1118;
 padding:25px;
 border-radius:10px;
 }
 
 /* MACHINES */
+
+.machine-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
 
 .machine img{
 width:100%;
@@ -136,38 +133,54 @@ border-radius:10px;
 
 /* RFQ */
 
-form{
-max-width:500px;
+.rfq{
+max-width:450px;
 margin:auto;
 display:flex;
 flex-direction:column;
-gap:15px;
+gap:14px;
 }
 
-input,textarea{
+.rfq input,
+.rfq textarea{
 padding:12px;
 border-radius:6px;
 border:none;
 }
 
-/* TICKER */
+.rfq button{
+background:#1e6fff;
+border:none;
+padding:12px;
+border-radius:6px;
+color:white;
+}
+
+/* CONTACT */
+
+.contact{
+margin-top:40px;
+line-height:1.7;
+}
+
+/* LIVE TICKER */
 
 #ticker{
 position:fixed;
 bottom:0;
 width:100%;
 background:black;
-border-top:3px solid #0a84ff;
+border-top:3px solid #1e6fff;
 overflow:hidden;
 font-family:monospace;
-font-size:24px;
+font-size:22px;
 }
 
 .ticker-track{
 display:flex;
 gap:120px;
 white-space:nowrap;
-animation:ticker 40s linear infinite;
+animation:ticker 35s linear infinite;
 }
 
 @keyframes ticker{
@@ -175,9 +188,20 @@ animation:ticker 40s linear infinite;
 100%{transform:translateX(-50%)}
 }
 
-.up{color:#00ff7b}
-.down{color:#ff4040}
-.metal{color:#00eaff}
+.up{
+color:#00ff9d;
+font-weight:bold;
+}
+
+.down{
+color:#ff4c4c;
+font-weight:bold;
+}
+
+.metal{
+color:#1e90ff;
+font-weight:bold;
+}
 
 </style>
 
@@ -192,8 +216,6 @@ animation:ticker 40s linear infinite;
 <a href="#machines">Machines</a>
 <a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
-
-<div id="clock"></div>
 
 </nav>
 
@@ -216,7 +238,7 @@ animation:ticker 40s linear infinite;
 <div class="grid">
 
 <div class="card">Inconel Machining</div>
-<div class="card">Titanium</div>
+<div class="card">Titanium Machining</div>
 <div class="card">Tool Steel</div>
 <div class="card">Stainless Steel</div>
 <div class="card">Prototype Work</div>
@@ -230,22 +252,16 @@ animation:ticker 40s linear infinite;
 
 <h2>Machines</h2>
 
-<div class="grid">
+<div class="machine-grid">
 
 <div class="machine">
-
 <img src="vf0.webp">
-
 <h3>Haas VF‑0</h3>
-
 </div>
 
 <div class="machine">
-
 <img src="jupiter.png">
-
-<h3>Jupiter Mill</h3>
-
+<h3>Jupiter Precision Mill</h3>
 </div>
 
 </div>
@@ -256,7 +272,10 @@ animation:ticker 40s linear infinite;
 
 <h2>Request a Quote</h2>
 
-<form action="https://formsubmit.co/bametal.llc@gmail.com" method="POST" enctype="multipart/form-data">
+<form class="rfq"
+action="https://formsubmit.co/bametal.llc@gmail.com"
+method="POST"
+enctype="multipart/form-data">
 
 <input type="text" name="name" placeholder="Name" required>
 
@@ -270,9 +289,7 @@ animation:ticker 40s linear infinite;
 
 </form>
 
-</section>
-
-<section class="section" id="contact">
+<div class="contact" id="contact">
 
 <h2>Contact</h2>
 
@@ -281,6 +298,8 @@ animation:ticker 40s linear infinite;
 <p>Stephen Andrews — (586) 484‑0469</p>
 
 <p>Nick Birchmeier — (810) 293‑9524</p>
+
+</div>
 
 </section>
 
@@ -292,21 +311,9 @@ Loading live market data...
 
 <script>
 
-/* CLOCK */
-
-function updateClock(){
-document.getElementById("clock").innerText =
-new Date().toLocaleTimeString();
-}
-
-setInterval(updateClock,1000);
-updateClock();
-
-/* LIVE MARKETS */
-
 async function loadMarket(){
 
-let stocks=["ATI","CRS","AA","NUE","BHP","RIO"];
+let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
 
 let metals=["HG=F","ALI=F","NI=F"];
 
@@ -316,9 +323,7 @@ let html="";
 
 for(let s of stocks){
 
-let r=await fetch(
-"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s
-);
+let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
 
 let d=await r.json();
 
@@ -328,9 +333,9 @@ let price=q.regularMarketPrice;
 
 let change=q.regularMarketChangePercent.toFixed(2);
 
-let cls=change>=0?"up":"down";
+let c=change>=0?"up":"down";
 
-html+=`<span class="${cls}">${s} ${price} (${change}%)</span>`;
+html+=`<span class="${c}">${s} ${price} (${change}%)</span>`;
 
 }
 
