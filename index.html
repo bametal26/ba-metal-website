@@ -566,7 +566,7 @@ let arrow = change >= 0 ? "▲" : "▼";
 let color = change >= 0 ? "#00ff9d" : "#ff4c4c";
 
 html+= `<span style="margin-right:30px;color:${color}">
-${m.name} ${arrow} ${price} (${change.toFixed(2)}%)
+${m.name} ${arrow} ${price.toFixed(2)} (${change.toFixed(2)}%)
 </span>`;
 
 }catch(e){
