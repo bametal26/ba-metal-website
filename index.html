@@ -545,7 +545,7 @@ async function loadMetals(){
 const metals=[
 {symbol:"HG=F",name:"Copper"},
 {symbol:"ALI=F",name:"Aluminum"},
-{symbol:"NI=F",name:"Nickel"}
+{symbol:"NICKEL",name:"Nickel"}
 ];
 
 let html="";
@@ -554,7 +554,7 @@ for(let m of metals){
 
 try{
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m.symbol);
+let r = await fetch("https://query2.finance.yahoo.com/v7/finance/quote?symbols="+m.symbol);
 let d=await r.json();
 let q=d.quoteResponse.result[0];
 
