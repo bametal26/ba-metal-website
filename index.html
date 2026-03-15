@@ -18,14 +18,10 @@ margin:0;
 font-family:Poppins;
 color:white;
 overflow-x:hidden;
-background:
-radial-gradient(circle at 10% 20%, #2a2a72, transparent 40%),
-radial-gradient(circle at 80% 70%, #1b2735, transparent 40%),
-radial-gradient(circle at 50% 50%, #090a0f, transparent 60%),
-black;
+background:black;
 }
 
-/* STAR FIELD */
+/* SPACE BACKGROUND */
 
 body::before{
 content:"";
@@ -34,19 +30,29 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background-image:
-radial-gradient(white 2px, transparent 2px),
-radial-gradient(white 1px, transparent 1px),
-radial-gradient(#88aaff 2px, transparent 2px);
-background-size:120px 120px, 200px 200px, 300px 300px;
-opacity:.7;
-animation:stars 160s linear infinite;
-z-index:-1;
+background-image:url("https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Starfield/glTF/Starfield.jpg");
+background-size:cover;
+opacity:.6;
+z-index:-3;
 }
 
-@keyframes stars{
-from{transform:translateY(0);}
-to{transform:translateY(-2000px);}
+/* PLANETS */
+
+.planet-bg{
+position:fixed;
+width:160px;
+opacity:.5;
+z-index:-2;
+}
+
+.planet1{
+top:15%;
+left:10%;
+}
+
+.planet2{
+bottom:20%;
+right:12%;
 }
 
 /* SHIPS */
@@ -54,23 +60,15 @@ to{transform:translateY(-2000px);}
 .ship{
 position:fixed;
 font-size:30px;
-animation:ship1 40s linear infinite;
+top:70%;
+left:-100px;
+animation:shipFly 35s linear infinite;
+pointer-events:none;
 }
 
-.ship2{
-position:fixed;
-font-size:26px;
-animation:ship2 60s linear infinite;
-}
-
-@keyframes ship1{
-0%{left:-100px;top:80%;}
-100%{left:110%;top:10%;}
-}
-
-@keyframes ship2{
-0%{left:110%;top:50%;}
-100%{left:-120px;top:30%;}
+@keyframes shipFly{
+0%{left:-120px; top:70%;}
+100%{left:110%; top:20%;}
 }
 
 /* HEADER */
@@ -80,14 +78,14 @@ text-align:center;
 padding:30px;
 }
 
-/* TOP BAR */
+/* INFO BAR */
 
 #livebar{
 display:flex;
 justify-content:center;
 gap:60px;
 font-size:22px;
-padding:12px;
+padding:14px;
 }
 
 #greeting{
@@ -154,7 +152,7 @@ text-decoration:none;
 font-weight:600;
 }
 
-/* PLANET */
+/* EARTH */
 
 .planet-system{
 position:relative;
@@ -251,7 +249,7 @@ margin-top:14px;
 font-size:18px;
 }
 
-/* STOCK TICKER */
+/* TICKER */
 
 #ticker{
 position:fixed;
@@ -264,13 +262,13 @@ font-size:18px;
 overflow:hidden;
 }
 
-.ticker-wrap{
+.ticker-track{
 display:flex;
 width:max-content;
 animation:ticker 40s linear infinite;
 }
 
-.ticker-wrap span{
+.ticker-track span{
 padding:12px 40px;
 white-space:nowrap;
 }
@@ -295,8 +293,12 @@ color:#777;
 
 <body>
 
+<!-- background planets -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Venus_globe.jpg" class="planet-bg planet1">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Jupiter_by_Cassini-Huygens.jpg" class="planet-bg planet2">
+
+<!-- ship -->
 <div class="ship">🚀</div>
-<div class="ship2">🛸</div>
 
 <header>
 <img src="BA Logo.jpg" style="height:160px;">
@@ -393,7 +395,7 @@ BA Metal LLC CNC Machining
 
 <div id="ticker">
 
-<div class="ticker-wrap">
+<div class="ticker-track">
 
 <span class="up">ATI Metals ▲2.4%</span>
 <span class="up">Carpenter Tech ▲1.8%</span>
