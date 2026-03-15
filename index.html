@@ -28,7 +28,7 @@ height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
 radial-gradient(#4e8cff 2px, transparent 2px);
-background-size:200px 200px,280px 280px;
+background-size:180px 180px,260px 260px;
 animation:stars 140s linear infinite;
 z-index:-1;
 }
@@ -44,7 +44,7 @@ nav{
 display:flex;
 justify-content:center;
 gap:40px;
-padding:20px;
+padding:18px;
 background:black;
 border-bottom:2px solid #1e6fff;
 position:sticky;
@@ -56,17 +56,21 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:600;
+padding:6px 12px;
+border-radius:6px;
+transition:.3s;
 }
 
 nav a:hover{
-color:#1e6fff;
+background:#1e6fff;
+box-shadow:0 0 10px #1e6fff;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:40px 20px 10px 20px;
+padding:50px 20px 20px 20px;
 }
 
 .hero h1{
@@ -81,6 +85,7 @@ padding:14px 28px;
 border-radius:6px;
 text-decoration:none;
 color:white;
+box-shadow:0 0 15px #1e6fff;
 }
 
 /* EARTH */
@@ -92,10 +97,10 @@ height:260px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
-box-shadow:0 0 40px #1e6fff;
+box-shadow:0 0 60px #1e6fff;
 }
 
-/* SECTION */
+/* SECTIONS */
 
 .section{
 max-width:1100px;
@@ -103,8 +108,6 @@ margin:auto;
 padding:70px 20px;
 text-align:center;
 }
-
-/* GRID */
 
 .grid{
 display:grid;
@@ -122,8 +125,14 @@ border-radius:10px;
 
 .machine-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:30px;
+}
+
+.machine{
+background:#111;
+padding:20px;
+border-radius:10px;
 }
 
 .machine img{
@@ -131,14 +140,18 @@ width:100%;
 border-radius:10px;
 }
 
-/* RFQ */
+/* RFQ FORM */
 
 .rfq{
-max-width:450px;
+max-width:460px;
 margin:auto;
+background:#111;
+padding:25px;
+border-radius:10px;
 display:flex;
 flex-direction:column;
 gap:14px;
+box-shadow:0 0 15px rgba(0,0,0,.5);
 }
 
 .rfq input,
@@ -154,13 +167,15 @@ border:none;
 padding:12px;
 border-radius:6px;
 color:white;
+cursor:pointer;
+box-shadow:0 0 10px #1e6fff;
 }
 
 /* CONTACT */
 
 .contact{
 margin-top:40px;
-line-height:1.7;
+line-height:1.8;
 }
 
 /* LIVE TICKER */
@@ -180,7 +195,7 @@ font-size:22px;
 display:flex;
 gap:120px;
 white-space:nowrap;
-animation:ticker 35s linear infinite;
+animation:ticker 40s linear infinite;
 }
 
 @keyframes ticker{
@@ -188,23 +203,11 @@ animation:ticker 35s linear infinite;
 100%{transform:translateX(-50%)}
 }
 
-.up{
-color:#00ff9d;
-font-weight:bold;
-}
-
-.down{
-color:#ff4c4c;
-font-weight:bold;
-}
-
-.metal{
-color:#1e90ff;
-font-weight:bold;
-}
+.up{color:#00ff9d;font-weight:bold;}
+.down{color:#ff4c4c;font-weight:bold;}
+.metal{color:#1e90ff;font-weight:bold;}
 
 </style>
-
 </head>
 
 <body>
@@ -305,7 +308,7 @@ enctype="multipart/form-data">
 
 <div id="ticker">
 <div class="ticker-track" id="ticker-data">
-Loading live market data...
+Loading market data...
 </div>
 </div>
 
@@ -315,7 +318,11 @@ async function loadMarket(){
 
 let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
 
-let metals=["HG=F","ALI=F","NI=F"];
+let metals=[
+["HG=F","Copper"],
+["ALI=F","Aluminum"],
+["NI=F","Nickel"]
+];
 
 let html="";
 
@@ -323,7 +330,32 @@ let html="";
 
 for(let s of stocks){
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
+let r=await fetch(
+"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s
+);
+
+let d=await r.json();
+
+let q=d.quoteResponse.result[0];
+
+let price=q.regularMarketPrice;
+let change=q.regularMarketChangePercent.toFixed(2);
+
+let c=change>=0?"up":"down";
+
+html+=`<span class="${c}">
+${s} ${price} (${change}%)
+</span>`;
+
+}
+
+/* METAL FUTURES */
+
+for(let m of metals){
+
+let r=await fetch(
+"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]
+);
 
 let d=await r.json();
 
@@ -331,19 +363,11 @@ let q=d.quoteResponse.result[0];
 
 let price=q.regularMarketPrice;
 
-let change=q.regularMarketChangePercent.toFixed(2);
-
-let c=change>=0?"up":"down";
-
-html+=`<span class="${c}">${s} ${price} (${change}%)</span>`;
+html+=`<span class="metal">
+${m[1]} ${price}
+</span>`;
 
 }
-
-/* METALS */
-
-html+=`<span class="metal">Nickel Futures</span>`;
-html+=`<span class="metal">Copper Futures</span>`;
-html+=`<span class="metal">Aluminum Futures</span>`;
 
 html+=`<span class="up">BA METAL 🚀</span>`;
 
