@@ -391,61 +391,92 @@ new Date().toLocaleTimeString();
 setInterval(updateClock,1000);
 updateClock();
 
-/* MARKET DATA */
+
+/* MARKET TICKER */
 
 async function loadMarket(){
 
-let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
+let ticker = document.getElementById("ticker-data");
 
-let metals=[
+let stocks = ["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
+
+let metals = [
 ["HG=F","Copper"],
 ["ALI=F","Aluminum"],
 ["NI=F","Nickel"]
 ];
 
-let html="";
+let html = "";
 
 /* STOCKS */
 
 for(let s of stocks){
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
-let d=await r.json();
-let q=d.quoteResponse.result[0];
+try{
 
-let price=q.regularMarketPrice;
-let change=q.regularMarketChangePercent.toFixed(2);
+let r = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
 
-let cls=change>=0?"up":"down";
+let d = await r.json();
 
-html+=`<span class="${cls}">
-${s} ${price} (${change}%)
+let q = d.quoteResponse.result[0];
+
+let price = q.regularMarketPrice;
+let change = q.regularMarketChangePercent;
+
+let cls = change >= 0 ? "up" : "down";
+
+html += `<span class="${cls}">
+${s} ${price} (${change.toFixed(2)}%)
 </span>`;
 
+}catch(e){
+
+html += `<span class="up">${s}</span>`;
+
 }
+
+}
+
 
 /* METALS */
 
 for(let m of metals){
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]);
-let d=await r.json();
-let q=d.quoteResponse.result[0];
+try{
 
-html+=`<span class="metal">
+let r = await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+m[0]);
+
+let d = await r.json();
+
+let q = d.quoteResponse.result[0];
+
+html += `<span class="metal">
 ${m[1]} ${q.regularMarketPrice}
 </span>`;
 
-}
+}catch(e){
 
-/* duplicate ticker */
-
-document.getElementById("ticker-data").innerHTML = html + html;
+html += `<span class="metal">${m[1]}</span>`;
 
 }
+
+}
+
+
+/* ensure ticker always renders */
+
+ticker.innerHTML = html + html;
+
+}
+
+
+/* load immediately */
 
 loadMarket();
-setInterval(loadMarket,300000);
+
+/* refresh every 3 minutes */
+
+setInterval(loadMarket,180000);
 
 </script>
 
