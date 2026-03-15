@@ -227,17 +227,7 @@ border-radius:10px;
 margin-top:20px;
 }
 
-/* METAL BAR */
 
-#metal-bar{
-position:fixed;
-bottom:45px;
-width:100%;
-text-align:center;
-font-family:monospace;
-font-size:16px;
-z-index:9998;
-}
 
 /* STOCK TICKER */
 
@@ -416,7 +406,11 @@ async function loadMarket(){
 
 let ticker=document.getElementById("ticker-data");
 
+/* stocks */
+
 let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT"];
+
+/* metals */
 
 let metals=[
 {name:"Copper",price:4.05,change:0.22},
@@ -445,14 +439,12 @@ for(let s of stocks){
 
 try{
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
+let r=await fetch("https://financialmodelingprep.com/api/v3/quote/"+s+"?apikey=demo");
 
 let d=await r.json();
 
-let q=d.quoteResponse.result[0];
-
-let price=q.regularMarketPrice;
-let percent=q.regularMarketChangePercent;
+let price=d[0].price;
+let percent=d[0].changesPercentage;
 
 let cls=percent>=0?"up":"down";
 
@@ -476,9 +468,8 @@ ticker.innerHTML=html+html;
 
 loadMarket();
 
-setInterval(loadMarket,180000);
+setInterval(loadMarket,120000);
 
 </script>
-
 </body>
 </html>
