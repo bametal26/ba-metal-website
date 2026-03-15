@@ -370,14 +370,17 @@ Upload CAD Files
 
 <h2>Contact</h2>
 
-<p>
+<div style="font-size:18px; line-height:1.8;">
+
 <strong>BA Metal LLC</strong><br>
+
 Email: <a href="mailto:bametal.llc@gmail.com">bametal.llc@gmail.com</a><br>
+
 Phone: (248) 555‑0000
-</p>
+
+</div>
 
 </section>
-
 <section class="section" id="location">
 
 <h2>Location</h2>
@@ -449,12 +452,12 @@ let d=await r.json();
 let q=d.quoteResponse.result[0];
 
 let price=q.regularMarketPrice;
-let change=q.regularMarketChangePercent;
+let percent=q.regularMarketChangePercent;
 
-let cls=change>=0?"up":"down";
+let cls=percent>=0?"up":"down";
 
 html+=`<span class="${cls}">
-${s} ${price.toFixed(2)} (${change.toFixed(2)}%)
+${s} ${price.toFixed(2)} (${percent.toFixed(2)}%)
 </span>`;
 
 }catch{
