@@ -3,7 +3,7 @@
 
 <head>
 
-<title>BA Metal LLC | Advanced CNC Machining</title>
+<title>BA Metal LLC | Precision CNC Machining</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,7 +21,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* MOVING STARS */
+/* STAR BACKGROUND */
 
 body::before{
 content:"";
@@ -63,7 +63,6 @@ background:#000;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
-z-index:10;
 }
 
 nav a{
@@ -108,7 +107,7 @@ color:white;
 text-decoration:none;
 }
 
-/* BIG EARTH */
+/* EARTH */
 
 .earth-container{
 margin-top:60px;
@@ -142,22 +141,22 @@ font-size:36px;
 margin-bottom:40px;
 }
 
-/* CAPABILITIES GRID (3 rows evenly) */
+/* GRID */
 
-.cap-grid{
+.grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:25px;
 }
 
-.cap{
+.card{
 background:#111;
 padding:25px;
 border-radius:10px;
 transition:.25s;
 }
 
-.cap:hover{
+.card:hover{
 background:#0a84ff;
 transform:scale(1.05);
 }
@@ -187,6 +186,36 @@ width:100%;
 border-radius:8px;
 }
 
+/* RFQ FORM */
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:500px;
+margin:auto;
+}
+
+input,textarea{
+padding:12px;
+border-radius:6px;
+border:none;
+}
+
+button{
+background:#0a84ff;
+border:none;
+padding:14px;
+color:white;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0070e0;
+}
+
 /* CONTACT */
 
 .contact-box{
@@ -201,38 +230,6 @@ margin:auto;
 color:#0a84ff;
 text-decoration:none;
 }
-
-.contact-box a:hover{
-text-decoration:underline;
-}
-
-/* STOCK TICKER */
-
-#ticker{
-position:fixed;
-bottom:0;
-width:100%;
-background:black;
-border-top:3px solid #0a84ff;
-overflow:hidden;
-font-family:monospace;
-font-size:20px;
-}
-
-.ticker-track{
-display:flex;
-gap:80px;
-white-space:nowrap;
-animation:ticker 35s linear infinite;
-}
-
-@keyframes ticker{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
-}
-
-.up{color:#00ff7b;}
-.down{color:#ff4040;}
 
 footer{
 padding:50px;
@@ -255,17 +252,20 @@ color:#aaa;
 <a href="#home">Home</a>
 <a href="#capabilities">Capabilities</a>
 <a href="#machines">Machines</a>
+<a href="#materials">Materials</a>
+<a href="#industries">Industries</a>
+<a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
 
 </nav>
 
 <section class="hero" id="home">
 
-<h1>Advanced CNC Machining</h1>
+<h1>Precision CNC Machining</h1>
 
 <p>Prototype • Production • Hard Materials</p>
 
-<a class="button" href="#contact">Request a Quote</a>
+<a class="button" href="#rfq">Request a Quote</a>
 
 <div class="earth-container">
 <div class="earth"></div>
@@ -277,15 +277,14 @@ color:#aaa;
 
 <h2>Capabilities</h2>
 
-<div class="cap-grid">
+<div class="grid">
 
-<div class="cap">Inconel Machining</div>
-<div class="cap">Titanium Components</div>
-<div class="cap">Tool Steel</div>
-
-<div class="cap">Stainless Steel</div>
-<div class="cap">Prototype Development</div>
-<div class="cap">Tight Tolerance Parts</div>
+<div class="card">Inconel Machining</div>
+<div class="card">Titanium Components</div>
+<div class="card">Tool Steel</div>
+<div class="card">Stainless Steel</div>
+<div class="card">Prototype Development</div>
+<div class="card">Tight Tolerance ±0.0005"</div>
 
 </div>
 
@@ -311,6 +310,62 @@ color:#aaa;
 
 </section>
 
+<section class="section" id="materials">
+
+<h2>Materials Machined</h2>
+
+<div class="grid">
+
+<div class="card">Aluminum</div>
+<div class="card">Stainless Steel</div>
+<div class="card">Titanium</div>
+<div class="card">Inconel</div>
+<div class="card">Tool Steel</div>
+<div class="card">Engineering Plastics</div>
+
+</div>
+
+</section>
+
+<section class="section" id="industries">
+
+<h2>Industries Served</h2>
+
+<div class="grid">
+
+<div class="card">Aerospace</div>
+<div class="card">Automotive</div>
+<div class="card">Defense</div>
+<div class="card">Medical</div>
+<div class="card">Tooling</div>
+<div class="card">Prototype Development</div>
+
+</div>
+
+</section>
+
+<section class="section" id="rfq">
+
+<h2>Request a Quote</h2>
+
+<p>Upload your drawing or CAD file and we will review it for quoting.</p>
+
+<form action="https://formsubmit.co/bametal.llc@gmail.com" method="POST" enctype="multipart/form-data">
+
+<input type="text" name="name" placeholder="Your Name" required>
+
+<input type="email" name="email" placeholder="Your Email" required>
+
+<input type="file" name="attachment" accept=".step,.stp,.pdf,.dwg,.dxf">
+
+<textarea name="message" placeholder="Project details"></textarea>
+
+<button type="submit">Submit RFQ</button>
+
+</form>
+
+</section>
+
 <section class="section" id="contact">
 
 <h2>Contact</h2>
@@ -329,29 +384,9 @@ color:#aaa;
 
 <footer>
 
-BA Metal LLC • CNC Machining
+BA Metal LLC • Precision CNC Machining
 
 </footer>
-
-<div id="ticker">
-
-<div class="ticker-track">
-
-<span class="up">ATI Metals ▲2.4%</span>
-<span class="up">Carpenter Tech ▲1.8%</span>
-<span class="down">Kennametal ▼0.6%</span>
-<span class="up">Alcoa ▲3.2%</span>
-<span class="up">Nvidia ▲1.1%</span>
-<span class="up">BA METAL 🚀 +5.0%</span>
-
-<span class="up">ATI Metals ▲2.4%</span>
-<span class="up">Carpenter Tech ▲1.8%</span>
-<span class="down">Kennametal ▼0.6%</span>
-<span class="up">Alcoa ▲3.2%</span>
-
-</div>
-
-</div>
 
 </body>
 </html>
