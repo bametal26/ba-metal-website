@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
 <title>BA Metal LLC | Precision CNC Machining</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-
-html{scroll-behavior:smooth;}
 
 body{
 margin:0;
 font-family:Poppins;
 background:black;
 color:white;
-overflow-x:hidden;
 }
 
-/* STARFIELD */
+/* STAR BACKGROUND */
 
 body::before{
 content:"";
@@ -30,32 +26,15 @@ width:200%;
 height:200%;
 background-image:
 radial-gradient(white 2px, transparent 2px),
-radial-gradient(#7aa7ff 2px, transparent 2px);
-background-size:180px 180px,260px 260px;
-animation:stars 120s linear infinite;
-z-index:-2;
+radial-gradient(#6fa8ff 2px, transparent 2px);
+background-size:200px 200px,300px 300px;
+animation:stars 140s linear infinite;
+z-index:-1;
 }
 
 @keyframes stars{
 0%{transform:translate(0,0)}
-100%{transform:translate(-900px,-700px)}
-}
-
-/* SHOOTING STAR */
-
-.shooting-star{
-position:fixed;
-width:3px;
-height:100px;
-background:linear-gradient(white,transparent);
-transform:rotate(45deg);
-animation:shoot 6s linear infinite;
-opacity:.8;
-}
-
-@keyframes shoot{
-0%{top:-10%;left:110%}
-100%{top:120%;left:-20%}
+100%{transform:translate(-1000px,-800px)}
 }
 
 /* NAVBAR */
@@ -64,8 +43,8 @@ nav{
 display:flex;
 justify-content:center;
 gap:40px;
-padding:18px;
-background:#000;
+background:black;
+padding:20px;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
@@ -82,84 +61,52 @@ nav a:hover{
 color:#0a84ff;
 }
 
-/* DIGITAL CLOCK */
+/* CLOCK */
 
 #clock{
 position:absolute;
 right:25px;
 font-family:Orbitron;
-font-size:18px;
 color:#00eaff;
 border:1px solid #0a84ff;
 padding:6px 14px;
 border-radius:6px;
-box-shadow:0 0 10px #0a84ff;
 }
 
 /* HERO */
 
 .hero{
 text-align:center;
-padding:40px 20px 10px 20px;
+padding:40px 20px;
 }
 
 .hero h1{
 font-family:Orbitron;
-font-size:58px;
-margin-bottom:5px;
-}
-
-.hero p{
-color:#bbb;
+font-size:55px;
 margin-bottom:10px;
 }
 
 .button{
-padding:14px 30px;
 background:#0a84ff;
+padding:14px 30px;
 border-radius:6px;
 color:white;
 text-decoration:none;
-display:inline-block;
-margin-top:10px;
 }
 
-/* GLOBE */
-
-.earth-container{
-position:relative;
-margin-top:30px;
-display:flex;
-justify-content:center;
-}
+/* EARTH */
 
 .earth{
+margin:30px auto;
 width:280px;
 height:280px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
-box-shadow:0 0 40px #0a84ff;
+box-shadow:0 0 50px #0a84ff;
 }
 
-/* SATELLITE */
-
-.satellite{
-position:absolute;
-width:12px;
-height:12px;
-background:#00eaff;
-border-radius:50%;
-box-shadow:0 0 10px #00eaff;
-animation:orbit 14s linear infinite;
-}
-
-@keyframes orbit{
-0%{transform:rotate(0deg) translateX(180px) rotate(0deg)}
-100%{transform:rotate(360deg) translateX(180px) rotate(-360deg)}
-}
-
-/* SECTION */
+/* SECTIONS */
 
 .section{
 max-width:1100px;
@@ -167,13 +114,6 @@ margin:auto;
 padding:60px 20px;
 text-align:center;
 }
-
-.section h2{
-font-family:Orbitron;
-margin-bottom:30px;
-}
-
-/* GRID */
 
 .grid{
 display:grid;
@@ -185,21 +125,23 @@ gap:25px;
 background:#111;
 padding:25px;
 border-radius:10px;
-transition:.25s;
 }
 
-.card:hover{
-background:#0a84ff;
+/* MACHINES */
+
+.machine img{
+width:100%;
+border-radius:10px;
 }
 
 /* RFQ */
 
 form{
+max-width:500px;
+margin:auto;
 display:flex;
 flex-direction:column;
 gap:15px;
-max-width:500px;
-margin:auto;
 }
 
 input,textarea{
@@ -208,30 +150,7 @@ border-radius:6px;
 border:none;
 }
 
-button{
-background:#0a84ff;
-border:none;
-padding:14px;
-border-radius:6px;
-color:white;
-cursor:pointer;
-}
-
-/* FILE BUTTON */
-
-.file-upload{
-display:inline-block;
-padding:12px 20px;
-background:#0a84ff;
-border-radius:6px;
-cursor:pointer;
-}
-
-.file-upload input{
-display:none;
-}
-
-/* MARKET TICKER */
+/* TICKER */
 
 #ticker{
 position:fixed;
@@ -242,8 +161,6 @@ border-top:3px solid #0a84ff;
 overflow:hidden;
 font-family:monospace;
 font-size:24px;
-padding:10px 0;
-z-index:999;
 }
 
 .ticker-track{
@@ -258,26 +175,9 @@ animation:ticker 40s linear infinite;
 100%{transform:translateX(-50%)}
 }
 
-.up{
-color:#00ff7b;
-font-weight:bold;
-}
-
-.down{
-color:#ff4040;
-font-weight:bold;
-}
-
-.metal{
-color:#00eaff;
-font-weight:bold;
-}
-
-footer{
-padding:50px;
-text-align:center;
-color:#aaa;
-}
+.up{color:#00ff7b}
+.down{color:#ff4040}
+.metal{color:#00eaff}
 
 </style>
 
@@ -285,15 +185,11 @@ color:#aaa;
 
 <body>
 
-<div class="shooting-star"></div>
-
 <nav>
 
 <a href="#home">Home</a>
 <a href="#capabilities">Capabilities</a>
 <a href="#machines">Machines</a>
-<a href="#materials">Materials</a>
-<a href="#industries">Industries</a>
 <a href="#rfq">RFQ</a>
 <a href="#contact">Contact</a>
 
@@ -309,13 +205,7 @@ color:#aaa;
 
 <a class="button" href="#rfq">Request a Quote</a>
 
-<div class="earth-container">
-
 <div class="earth"></div>
-
-<div class="satellite"></div>
-
-</div>
 
 </section>
 
@@ -326,23 +216,77 @@ color:#aaa;
 <div class="grid">
 
 <div class="card">Inconel Machining</div>
-<div class="card">Titanium Components</div>
+<div class="card">Titanium</div>
 <div class="card">Tool Steel</div>
 <div class="card">Stainless Steel</div>
-<div class="card">Prototype Development</div>
-<div class="card">Tolerance ±0.0005"</div>
+<div class="card">Prototype Work</div>
+<div class="card">±0.0005 Tolerance</div>
 
 </div>
 
 </section>
 
-<footer>
-BA Metal LLC • Precision CNC Machining
-</footer>
+<section class="section" id="machines">
+
+<h2>Machines</h2>
+
+<div class="grid">
+
+<div class="machine">
+
+<img src="vf0.webp">
+
+<h3>Haas VF‑0</h3>
+
+</div>
+
+<div class="machine">
+
+<img src="jupiter.png">
+
+<h3>Jupiter Mill</h3>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="rfq">
+
+<h2>Request a Quote</h2>
+
+<form action="https://formsubmit.co/bametal.llc@gmail.com" method="POST" enctype="multipart/form-data">
+
+<input type="text" name="name" placeholder="Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<input type="file" name="attachment" multiple>
+
+<textarea name="message" placeholder="Project details"></textarea>
+
+<button type="submit">Submit RFQ</button>
+
+</form>
+
+</section>
+
+<section class="section" id="contact">
+
+<h2>Contact</h2>
+
+<p>Email: bametal.llc@gmail.com</p>
+
+<p>Stephen Andrews — (586) 484‑0469</p>
+
+<p>Nick Birchmeier — (810) 293‑9524</p>
+
+</section>
 
 <div id="ticker">
 <div class="ticker-track" id="ticker-data">
-Loading market data...
+Loading live market data...
 </div>
 </div>
 
@@ -358,17 +302,23 @@ new Date().toLocaleTimeString();
 setInterval(updateClock,1000);
 updateClock();
 
-/* MARKET DATA */
+/* LIVE MARKETS */
 
 async function loadMarket(){
 
-let stocks=["ATI","CRS","AA","NUE","BHP","RIO","KMT","NVDA"];
+let stocks=["ATI","CRS","AA","NUE","BHP","RIO"];
+
+let metals=["HG=F","ALI=F","NI=F"];
 
 let html="";
 
+/* STOCKS */
+
 for(let s of stocks){
 
-let r=await fetch("https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s);
+let r=await fetch(
+"https://query1.finance.yahoo.com/v7/finance/quote?symbols="+s
+);
 
 let d=await r.json();
 
@@ -380,24 +330,19 @@ let change=q.regularMarketChangePercent.toFixed(2);
 
 let cls=change>=0?"up":"down";
 
-html+=`<span class="${cls}">
-${s} ${price} (${change}%)
-</span>`;
+html+=`<span class="${cls}">${s} ${price} (${change}%)</span>`;
 
 }
 
 /* METALS */
 
-html+=`<span class="metal">Nickel Market</span>`;
-html+=`<span class="metal">Copper Market</span>`;
-html+=`<span class="metal">Aluminum Market</span>`;
-html+=`<span class="metal">Titanium Market</span>`;
-
-/* COMPANY */
+html+=`<span class="metal">Nickel Futures</span>`;
+html+=`<span class="metal">Copper Futures</span>`;
+html+=`<span class="metal">Aluminum Futures</span>`;
 
 html+=`<span class="up">BA METAL 🚀</span>`;
 
-document.getElementById("ticker-data").innerHTML = html + html;
+document.getElementById("ticker-data").innerHTML=html+html;
 
 }
 
