@@ -52,25 +52,25 @@ header img{
 height:140px;
 }
 
-/* NAVBAR */
+/* NAV */
 
 nav{
 display:flex;
 justify-content:center;
-gap:40px;
+gap:35px;
 padding:20px;
 background:#000;
 border-bottom:2px solid #0a84ff;
 position:sticky;
 top:0;
+z-index:100;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-font-size:18px;
 font-weight:600;
-padding:10px 20px;
+padding:10px 18px;
 border-radius:6px;
 transition:.25s;
 }
@@ -100,11 +100,12 @@ color:#ccc;
 .button{
 display:inline-block;
 margin-top:20px;
-padding:14px 30px;
+padding:14px 32px;
 background:#0a84ff;
 border-radius:8px;
 color:white;
 text-decoration:none;
+font-weight:600;
 }
 
 /* EARTH */
@@ -121,12 +122,10 @@ height:320px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif");
 background-size:cover;
-box-shadow:
-0 0 40px #0a84ff,
-0 0 80px #0a84ff;
+box-shadow:0 0 40px #0a84ff,0 0 80px #0a84ff;
 }
 
-/* SECTION */
+/* SECTIONS */
 
 .section{
 max-width:1100px;
@@ -177,7 +176,7 @@ transition:.3s;
 }
 
 .machine:hover{
-transform:scale(1.03);
+transform:scale(1.04);
 box-shadow:0 0 20px #0a84ff;
 }
 
@@ -196,24 +195,41 @@ max-width:500px;
 margin:auto;
 }
 
-input,textarea{
+input, textarea{
 padding:12px;
 border-radius:6px;
 border:none;
+font-family:Poppins;
 }
 
 button{
 background:#0a84ff;
 border:none;
 padding:14px;
-color:white;
 border-radius:6px;
-font-size:16px;
+color:white;
+font-weight:600;
 cursor:pointer;
 }
 
 button:hover{
 background:#0070e0;
+}
+
+/* FILE BUTTON */
+
+.file-upload{
+display:inline-block;
+padding:12px 22px;
+background:#0a84ff;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.file-upload input{
+display:none;
 }
 
 /* CONTACT */
@@ -244,7 +260,9 @@ color:#aaa;
 <body>
 
 <header>
+
 <img src="BA Logo.jpg">
+
 </header>
 
 <nav>
@@ -284,7 +302,7 @@ color:#aaa;
 <div class="card">Tool Steel</div>
 <div class="card">Stainless Steel</div>
 <div class="card">Prototype Development</div>
-<div class="card">Tight Tolerance ±0.0005"</div>
+<div class="card">Tolerance ±0.0005"</div>
 
 </div>
 
@@ -348,7 +366,7 @@ color:#aaa;
 
 <h2>Request a Quote</h2>
 
-<p>Upload your drawing or CAD file and we will review it for quoting.</p>
+<p>Upload your drawing, CAD file, or image and our team will review it.</p>
 
 <form action="https://formsubmit.co/bametal.llc@gmail.com" method="POST" enctype="multipart/form-data">
 
@@ -356,9 +374,14 @@ color:#aaa;
 
 <input type="email" name="email" placeholder="Your Email" required>
 
-<input type="file" name="attachment" accept=".step,.stp,.pdf,.dwg,.dxf">
+<label class="file-upload">
+Choose Files
+<input type="file" name="attachment" multiple>
+</label>
 
 <textarea name="message" placeholder="Project details"></textarea>
+
+<input type="hidden" name="_next" value="https://bametalcnc.com/thanks.html">
 
 <button type="submit">Submit RFQ</button>
 
@@ -389,4 +412,5 @@ BA Metal LLC • Precision CNC Machining
 </footer>
 
 </body>
+
 </html>
