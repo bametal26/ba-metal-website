@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <title>BA Metal LLC | CNC Machining</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -9,39 +11,37 @@
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#0e0e0e;
+background:#111;
 color:white;
 }
 
 header{
 background:#000;
-padding:20px;
 text-align:center;
-font-size:28px;
-font-weight:bold;
+padding:20px;
 }
 
 nav{
 background:#1a1a1a;
-padding:12px;
 text-align:center;
+padding:12px;
 }
 
 nav a{
 color:white;
-margin:0 20px;
+margin:0 15px;
 text-decoration:none;
 font-weight:bold;
 }
 
 .hero{
-padding:100px 20px;
 text-align:center;
-background:#111;
+padding:100px 20px;
+background:#151515;
 }
 
 .hero h1{
-font-size:46px;
+font-size:48px;
 margin-bottom:10px;
 }
 
@@ -51,9 +51,8 @@ color:#bbb;
 }
 
 button{
-margin-top:20px;
 padding:14px 25px;
-background:#0077ff;
+background:#0a84ff;
 border:none;
 color:white;
 font-size:16px;
@@ -61,19 +60,19 @@ cursor:pointer;
 }
 
 .section{
-padding:60px 20px;
-max-width:1000px;
+max-width:900px;
 margin:auto;
+padding:60px 20px;
 }
 
-.section h2{
+h2{
 margin-bottom:20px;
 }
 
 footer{
 background:#000;
-padding:30px;
 text-align:center;
+padding:30px;
 margin-top:40px;
 color:#aaa;
 }
@@ -81,31 +80,38 @@ color:#aaa;
 </style>
 </head>
 
+
 <body>
 
+
 <header>
-<img src="BA Logo.jpg" style="height:140px;">
+<img src="BA Logo.jpg" style="height:120px;">
 </header>
 
+
 <nav>
-<a href="#">Home</a>
-<a href="#">Capabilities</a>
-<a href="#">Machines</a>
-<a href="#">Send Prints</a>
-<a href="#">Contact</a>
+<a href="#home">Home</a>
+<a href="#capabilities">Capabilities</a>
+<a href="#machines">Machines</a>
+<a href="#quote">Send Prints</a>
+<a href="#contact">Contact</a>
 </nav>
 
-<section class="hero">
+
+<section class="hero" id="home">
 
 <h1>Precision CNC Machining</h1>
 
 <p>Prototype to Production</p>
 
-<a href="#quote"><button>Request a Quote</button></a>
+<a href="#quote">
+<button>Request a Quote</button>
+</a>
 
 </section>
 
-<section class="section">
+
+<section class="section" id="capabilities">
 
 <h2>Capabilities</h2>
 
@@ -119,11 +125,28 @@ Stainless Steel<br>
 Engineering Plastics
 </p>
 
+</section>
+
+
+<section class="section" id="machines">
+
+<h2>Machines</h2>
+
+<p>
+
+Haas VF‑0<br>
+Jupiter Precision Mill
+
+</p>
+
+</section>
+
+
 <section class="section" id="quote">
 
 <h2>Send Prints for Quote</h2>
 
-<p>Email your drawings or STEP files to:</p>
+<p>Email drawings or STEP files to:</p>
 
 <p><b>bametal.llc@gmail.com</b></p>
 
@@ -138,6 +161,22 @@ Engineering Plastics
 
 </section>
 
+
+<section class="section" id="contact">
+
+<h2>Contact</h2>
+
+<p>
+
+BA Metal LLC<br>
+Mount Clemens, Michigan<br>
+Email: bametal.llc@gmail.com
+
+</p>
+
+</section>
+
+
 <footer>
 
 BA Metal LLC<br>
@@ -145,5 +184,7 @@ Mount Clemens, Michigan
 
 </footer>
 
+
 </body>
+
 </html>
